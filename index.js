@@ -89,6 +89,7 @@ module.exports = function (args, opts) {
                 if (/[A-Za-z]/.test(letters[j])
                 && /-?\d+(\.\d*)?(e-?\d+)?$/.test(next)) {
                     setArg(letters[j], next);
+                    broken = true;
                     break;
                 }
                 
