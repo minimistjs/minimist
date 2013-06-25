@@ -195,24 +195,6 @@ test('multiAlias', function (t) {
     t.end();
 });
 
-test('boolean default true', function (t) {
-    var argv = parse([], {
-        boolean: 'sometrue',
-        default: { sometrue: true }
-    });
-    t.equal(argv.sometrue, true);
-    t.end();
-});
-
-test('boolean default false', function (t) {
-    var argv = parse([], {
-        boolean: 'sometrue',
-        default: { sometrue: false }
-    });
-    t.equal(argv.somefalse, false);
-    t.end();
-});
-
 test('nested dotted objects', function (t) {
     var argv = parse([
         '--foo.bar', '3', '--foo.baz', '4',

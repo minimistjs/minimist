@@ -25,7 +25,7 @@ module.exports = function (args, opts) {
     
     var argv = { _ : [] };
     Object.keys(flags.bools).forEach(function (key) {
-        setArg(key, defaults[key] || false);
+        setArg(key, defaults[key] === undefined ? false : defaults[key]);
     });
     
     function setArg (key, val) {
