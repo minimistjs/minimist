@@ -14,7 +14,7 @@
         "files" : "test/*.js",
         "browsers" : [
             "ie/6..latest",
-            "ff/3.6", "firefox/latest",
+            "ff/5", "firefox/latest",
             "chrome/10", "chrome/latest",
             "safari/5.1", "safari/latest",
             "opera/12"
