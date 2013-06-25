@@ -92,69 +92,68 @@ test('flag boolean value', function (t) {
     t.end();
 });
 
-return;
- 
 test('flag boolean default false', function (t) {
-    var parse = optimist(['moo'])
-        .boolean(['t', 'verbose'])
-        .default('verbose', false)
-        .default('t', false).argv;
+    var argv = parse(['moo'], {
+        boolean: ['t', 'verbose'],
+        default: { verbose: false, t: false }
+    });
     
-    t.same(parse, {
+    t.deepEqual(argv, {
         verbose: false,
         t: false,
         _: ['moo']
     });
     
-    t.same(typeof parse.verbose, 'boolean');
-    t.same(typeof parse.t, 'boolean');
+    t.deepEqual(typeof argv.verbose, 'boolean');
+    t.deepEqual(typeof argv.t, 'boolean');
     t.end();
 
 });
 
 test('boolean groups', function (t) {
-    var parse = optimist([ '-x', '-z', 'one', 'two', 'three' ])
-        .boolean(['x','y','z']).argv;
+    var argv = parse([ '-x', '-z', 'one', 'two', 'three' ], {
+        boolean: ['x','y','z']
+    });
     
-    t.same(parse, {
+    t.deepEqual(argv, {
         x : true,
         y : false,
         z : true,
         _ : [ 'one', 'two', 'three' ]
     });
     
-    t.same(typeof parse.x, 'boolean');
-    t.same(typeof parse.y, 'boolean');
-    t.same(typeof parse.z, 'boolean');
+    t.deepEqual(typeof argv.x, 'boolean');
+    t.deepEqual(typeof argv.y, 'boolean');
+    t.deepEqual(typeof argv.z, 'boolean');
     t.end();
 });
 
 test('newlines in params' , function (t) {
     var args = parse([ '-s', "X\nX" ])
-    t.same(args, { _ : [], s : "X\nX" });
-
+    t.deepEqual(args, { _ : [], s : "X\nX" });
+    
     // reproduce in bash:
     // VALUE="new
     // line"
     // node program.js --s="$VALUE"
     args = parse([ "--s=X\nX" ])
-    t.same(args, { _ : [], s : "X\nX" });
+    t.deepEqual(args, { _ : [], s : "X\nX" });
     t.end();
 });
 
 test('strings' , function (t) {
-    var s = optimist([ '-s', '0001234' ]).string('s').argv.s;
-    t.same(s, '0001234');
-    t.same(typeof s, 'string');
+    var s = parse([ '-s', '0001234' ], { string: 's' }).s;
+    t.equal(s, '0001234');
+    t.equal(typeof s, 'string');
     
-    var x = optimist([ '-x', '56' ]).string('x').argv.x;
-    t.same(x, '56');
-    t.same(typeof x, 'string');
+    var x = parse([ '-x', '56' ], { string: 'x' }).x;
+    t.equal(x, '56');
+    t.equal(typeof x, 'string');
     t.end();
 });
 
 test('stringArgs', function (t) {
-    var s = optimist([ '  ', '  ' ]).string('_').argv._;
+    var s = parse([ '  ', '  ' ], { string: '_' })._;
     t.same(s.length, 2);
     t.same(typeof s[0], 'string');
     t.same(s[0], '  ');
@@ -176,10 +175,9 @@ test('slashBreak', function (t) {
 });
 
 test('alias', function (t) {
-    var argv = optimist([ '-f', '11', '--zoom', '55' ])
-        .alias('z', 'zoom')
-        .argv
-    ;
+    var argv = parse([ '-f', '11', '--zoom', '55' ], {
+        alias: { z: 'zoom' }
+    });
     t.equal(argv.zoom, 55);
     t.equal(argv.z, argv.zoom);
     t.equal(argv.f, 11);
@@ -187,10 +185,9 @@ test('alias', function (t) {
 });
 
 test('multiAlias', function (t) {
-    var argv = optimist([ '-f', '11', '--zoom', '55' ])
-        .alias('z', [ 'zm', 'zoom' ])
-        .argv
-    ;
+    var argv = parse([ '-f', '11', '--zoom', '55' ], {
+        alias: { z: [ 'zm', 'zoom' ] }
+    });
     t.equal(argv.zoom, 55);
     t.equal(argv.z, argv.zoom);
     t.equal(argv.z, argv.zm);
@@ -199,35 +196,29 @@ test('multiAlias', function (t) {
 });
 
 test('boolean default true', function (t) {
-    var argv = optimist.options({
-        sometrue: {
-            boolean: true,
-            default: true
-        }
-    }).argv;
-  
+    var argv = parse([], {
+        boolean: 'sometrue',
+        default: { sometrue: true }
+    });
     t.equal(argv.sometrue, true);
     t.end();
 });
 
 test('boolean default false', function (t) {
-    var argv = optimist.options({
-        somefalse: {
-            boolean: true,
-            default: false
-        }
-    }).argv;
-
+    var argv = parse([], {
+        boolean: 'sometrue',
+        default: { sometrue: false }
+    });
     t.equal(argv.somefalse, false);
     t.end();
 });
 
 test('nested dotted objects', function (t) {
-    var argv = optimist([
+    var argv = parse([
         '--foo.bar', '3', '--foo.baz', '4',
         '--foo.quux.quibble', '5', '--foo.quux.o_O',
         '--beep.boop'
-    ]).argv;
+    ]);
     
     t.same(argv.foo, {
         bar : 3,
@@ -247,20 +238,20 @@ test('boolean and alias with chainable api', function (t) {
     var opts = {
         herp: { alias: 'h', boolean: true }
     };
-    var aliasedArgv = optimist(aliased)
-        .boolean('herp')
-        .alias('h', 'herp')
-        .argv;
-    var propertyArgv = optimist(regular)
-        .boolean('herp')
-        .alias('h', 'herp')
-        .argv;
+    var aliasedArgv = parse(aliased, {
+        boolean: 'herp',
+        alias: { h: 'herp' }
+    });
+    var propertyArgv = parse(regular, {
+        boolean: 'herp',
+        alias: { h: 'herp' }
+    });
     var expected = {
         herp: true,
         h: true,
         '_': [ 'derp' ]
     };
-
+    
     t.same(aliasedArgv, expected);
     t.same(propertyArgv, expected); 
     t.end();
@@ -270,21 +261,18 @@ test('boolean and alias with options hash', function (t) {
     var aliased = [ '-h', 'derp' ];
     var regular = [ '--herp', 'derp' ];
     var opts = {
-        herp: { alias: 'h', boolean: true }
+        alias: { 'h': 'herp' },
+        boolean: 'herp'
     };
-    var aliasedArgv = optimist(aliased)
-      .options(opts)
-      .argv;
-    var propertyArgv = optimist(regular).options(opts).argv;
+    var aliasedArgv = parse(aliased, opts);
+    var propertyArgv = parse(regular, opts);
     var expected = {
         herp: true,
         h: true,
         '_': [ 'derp' ]
     };
-
     t.same(aliasedArgv, expected);
     t.same(propertyArgv, expected);
-
     t.end();
 });
 
@@ -292,16 +280,11 @@ test('boolean and alias using explicit true', function (t) {
     var aliased = [ '-h', 'true' ];
     var regular = [ '--herp',  'true' ];
     var opts = {
-        herp: { alias: 'h', boolean: true }
+        alias: { h: 'herp' },
+        boolean: 'h'
     };
-    var aliasedArgv = optimist(aliased)
-        .boolean('h')
-        .alias('h', 'herp')
-        .argv;
-    var propertyArgv = optimist(regular)
-        .boolean('h')
-        .alias('h', 'herp')
-        .argv;
+    var aliasedArgv = parse(aliased, opts);
+    var propertyArgv = parse(regular, opts);
     var expected = {
         herp: true,
         h: true,
@@ -315,13 +298,17 @@ test('boolean and alias using explicit true', function (t) {
 
 // regression, see https://github.com/substack/node-optimist/issues/71
 test('boolean and --x=true', function(t) {
-    var parsed = optimist(['--boool', '--other=true']).boolean('boool').argv;
+    var parsed = parse(['--boool', '--other=true'], {
+        boolean: 'boool'
+    });
 
     t.same(parsed.boool, true);
     t.same(parsed.other, 'true');
 
-    parsed = optimist(['--boool', '--other=false']).boolean('boool').argv;
-
+    parsed = parse(['--boool', '--other=false'], {
+        boolean: 'boool'
+    });
+    
     t.same(parsed.boool, true);
     t.same(parsed.other, 'false');
     t.end();
