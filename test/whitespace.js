@@ -1,5 +1,5 @@
 var parse = require('../');
-var test = require('tap').test;
+var test = require('tape');
 
 test('whitespace should be whitespace' , function (t) {
     t.plan(1);

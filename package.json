@@ -10,6 +10,16 @@
     "scripts": {
         "test": "tap test/*.js"
     },
+    "testling" : {
+        "files" : "test/*.js",
+        "browsers" : [
+            "ie/6..latest",
+            "ff/3.6", "firefox/latest",
+            "chrome/10", "chrome/latest",
+            "safari/5.1", "safari/latest",
+            "opera/12"
+        ]
+    },
     "repository": {
         "type": "git",
         "url": "git://github.com/substack/minimist.git"
