@@ -49,7 +49,7 @@ test('nums', function (t) {
         '-z', '1e7',
         '-w', '10f',
         '--hex', '0xdeadbeef',
-        '789',
+        '789'
     ]);
     t.deepEqual(argv, {
         x : 1234,
@@ -208,7 +208,7 @@ test('nested dotted objects', function (t) {
         quux : {
             quibble : 5,
             o_O : true
-        },
+        }
     });
     t.same(argv.beep, { boop : true });
     t.end();
