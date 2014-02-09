@@ -63,7 +63,7 @@ module.exports = function (args, opts) {
         else if (/^--.+/.test(arg)) {
             var key = arg.match(/^--(.+)/)[1];
             var next = args[i + 1];
-            if (next !== undefined && !next.match(/^-/)
+            if (next !== undefined && !/^-/.test(next)
             && !flags.bools[key]
             && (aliases[key] ? !flags.bools[aliases[key]] : true)) {
                 setArg(key, next);
