@@ -49,18 +49,18 @@ module.exports = function (args, opts) {
     for (var i = 0; i < args.length; i++) {
         var arg = args[i];
         
-        if (arg.match(/^--.+=/)) {
+        if (/^--.+=/.test(arg)) {
             // Using [\s\S] instead of . because js doesn't support the
             // 'dotall' regex modifier. See:
             // http://stackoverflow.com/a/1068308/13216
             var m = arg.match(/^--([^=]+)=([\s\S]*)$/);
             setArg(m[1], m[2]);
         }
-        else if (arg.match(/^--no-.+/)) {
+        else if (/^--no-.+/.test(arg)) {
             var key = arg.match(/^--no-(.+)/)[1];
             setArg(key, false);
         }
-        else if (arg.match(/^--.+/)) {
+        else if (/^--.+/.test(arg)) {
             var key = arg.match(/^--(.+)/)[1];
             var next = args[i + 1];
             if (next !== undefined && !next.match(/^-/)
@@ -77,7 +77,7 @@ module.exports = function (args, opts) {
                 setArg(key, true);
             }
         }
-        else if (arg.match(/^-[^-]+/)) {
+        else if (/^-[^-]+/.test(arg)) {
             var letters = arg.slice(1,-1).split('');
             
             var broken = false;
