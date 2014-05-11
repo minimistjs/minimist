@@ -26,3 +26,11 @@ test('nums', function (t) {
     t.deepEqual(typeof argv._[0], 'number');
     t.end();
 });
+
+test('already a number', function (t) {
+    var argv = parse([ '-x', 1234, 789 ]);
+    t.deepEqual(argv, { x : 1234, _ : [ 789 ] });
+    t.deepEqual(typeof argv.x, 'number');
+    t.deepEqual(typeof argv._[0], 'number');
+    t.end();
+});
