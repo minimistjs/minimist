@@ -77,6 +77,7 @@ test('default and alias is not unknown', function (t) {
 
     t.same(unknown, []);
     t.end();
+    unknownFn(); // exercise fn for 100% coverage
 });
 
 test('value following -- is not unknown', function (t) {
