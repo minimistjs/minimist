@@ -5,10 +5,12 @@
   "main": "index.js",
   "devDependencies": {
     "tape": "~1.0.4",
-    "tap": "~0.4.0"
+    "tap": "~0.4.0",
+    "covert": "^1.0.0"
   },
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "tap test/*.js",
+    "coverage": "covert test/*.js"
   },
   "testling" : {
     "files" : "test/*.js",
