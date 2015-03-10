@@ -74,7 +74,7 @@ module.exports = function (args, opts) {
         });
 
         var key = keys[keys.length - 1];
-        if (o[key] === undefined || flags.bools[key]) {
+        if (o[key] === undefined || flags.bools[key] || typeof o[key] === 'boolean') {
             o[key] = value;
         }
         else if (Array.isArray(o[key])) {
