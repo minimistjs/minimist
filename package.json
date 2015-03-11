@@ -4,21 +4,24 @@
   "description": "parse argument options",
   "main": "index.js",
   "devDependencies": {
-    "tape": "~1.0.4",
+    "covert": "^1.0.0",
     "tap": "~0.4.0",
-    "covert": "^1.0.0"
+    "tape": "^3.5.0"
   },
   "scripts": {
     "test": "tap test/*.js",
     "coverage": "covert test/*.js"
   },
-  "testling" : {
-    "files" : "test/*.js",
-    "browsers" : [
+  "testling": {
+    "files": "test/*.js",
+    "browsers": [
       "ie/6..latest",
-      "ff/5", "firefox/latest",
-      "chrome/10", "chrome/latest",
-      "safari/5.1", "safari/latest",
+      "ff/5",
+      "firefox/latest",
+      "chrome/10",
+      "chrome/latest",
+      "safari/5.1",
+      "safari/latest",
       "opera/12"
     ]
   },
