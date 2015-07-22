@@ -117,3 +117,27 @@ test('boolean and --x=true', function(t) {
     t.same(parsed.other, 'false');
     t.end();
 });
+
+test('boolean --boool=true', function (t) {
+    var parsed = parse(['--boool=true'], {
+        default: {
+            boool: false
+        },
+        boolean: ['boool']
+    });
+
+    t.same(parsed.boool, true);
+    t.end();
+});
+
+test('boolean --boool=false', function (t) {
+    var parsed = parse(['--boool=false'], {
+        default: {
+          boool: true
+        },
+        boolean: ['boool']
+    });
+
+    t.same(parsed.boool, false);
+    t.end();
+});

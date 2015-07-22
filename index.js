@@ -93,7 +93,12 @@ module.exports = function (args, opts) {
             // 'dotall' regex modifier. See:
             // http://stackoverflow.com/a/1068308/13216
             var m = arg.match(/^--([^=]+)=([\s\S]*)$/);
-            setArg(m[1], m[2], arg);
+            var key = m[1];
+            var value = m[2];
+            if (flags.bools[key]) {
+                value = value !== 'false';
+            }
+            setArg(key, value, arg);
         }
         else if (/^--no-.+/.test(arg)) {
             var key = arg.match(/^--no-(.+)/)[1];
