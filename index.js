@@ -85,6 +85,12 @@ module.exports = function (args, opts) {
         }
     }
     
+    function aliasIsBoolean(key) {
+      return aliases[key].some(function (x) {
+          return flags.bools[x];
+      });
+    }
+
     for (var i = 0; i < args.length; i++) {
         var arg = args[i];
         
@@ -110,7 +116,7 @@ module.exports = function (args, opts) {
             if (next !== undefined && !/^-/.test(next)
             && !flags.bools[key]
             && !flags.allBools
-            && (aliases[key] ? !flags.bools[aliases[key]] : true)) {
+            && (aliases[key] ? !aliasIsBoolean(key) : true)) {
                 setArg(key, next, arg);
                 i++;
             }
@@ -155,7 +161,7 @@ module.exports = function (args, opts) {
             if (!broken && key !== '-') {
                 if (args[i+1] && !/^(-|--)[^-]/.test(args[i+1])
                 && !flags.bools[key]
-                && (aliases[key] ? !flags.bools[aliases[key]] : true)) {
+                && (aliases[key] ? !aliasIsBoolean(key) : true)) {
                     setArg(key, args[i+1], arg);
                     i++;
                 }
