@@ -148,7 +148,7 @@ module.exports = function (args, opts) {
                 }
                 
                 if (letters[j+1] && letters[j+1].match(/\W/)) {
-                    setArg(letters[j], arg.slice(j+2), arg);
+                    setArg(letters[j], arg.slice(j+3), arg);
                     broken = true;
                     break;
                 }
