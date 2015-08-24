@@ -140,6 +140,12 @@ module.exports = function (args, opts) {
                     continue;
                 }
                 
+                if (/[A-Za-z]/.test(letters[j]) && /=/.test(next)) {
+                    setArg(letters[j], next.split('=')[1], arg);
+                    broken = true;
+                    break;
+                }
+                
                 if (/[A-Za-z]/.test(letters[j])
                 && /-?\d+(\.\d*)?(e-?\d+)?$/.test(next)) {
                     setArg(letters[j], next, arg);
@@ -148,7 +154,7 @@ module.exports = function (args, opts) {
                 }
                 
                 if (letters[j+1] && letters[j+1].match(/\W/)) {
-                    setArg(letters[j], arg.slice(j+3), arg);
+                    setArg(letters[j], arg.slice(j+2), arg);
                     broken = true;
                     break;
                 }
