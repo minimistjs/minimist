@@ -65,18 +65,19 @@ argument names to use as aliases
 first non-option
 * `opts['--']` - when true, populate `argv._` with everything before the `--`
 and `argv['--']` with everything after the `--`. Here's an example:
+
+  ```
+  > require('./')('one two three -- four five --six'.split(' '), { '--': true })
+  { _: [ 'one', 'two', 'three' ],
+    '--': [ 'four', 'five', '--six' ] }
+  ```
+
+  Note that with `opts['--']` set, parsing for arguments still stops after the
+  `--`.
+
 * `opts.unknown` - a function which is invoked with a command line parameter not
 defined in the `opts` configuration object. If the function returns `false`, the
 unknown option is not added to `argv`.
-
-```
-> require('./')('one two three -- four five --six'.split(' '), { '--': true })
-{ _: [ 'one', 'two', 'three' ],
-  '--': [ 'four', 'five', '--six' ] }
-```
-
-Note that with `opts['--']` set, parsing for arguments still stops after the
-`--`.
 
 # install
 
