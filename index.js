@@ -70,6 +70,7 @@ module.exports = function (args, opts) {
         var o = obj;
         keys.slice(0,-1).forEach(function (key) {
             if (o[key] === undefined) o[key] = {};
+            if (o[key] === {}.__proto__) o[key] = {};
             o = o[key];
         });
 
