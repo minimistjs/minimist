@@ -4,7 +4,7 @@ var test = require('tape');
 test('proto pollution', function (t) {
     var argv = parse(['--__proto__.x','123']);
     t.equal({}.x, undefined);
-    t.equal(argv.__proto__.x, 123);
+    t.equal(argv.__proto__.x, undefined);
     t.equal(argv.x, undefined);
     t.end();
 });
@@ -14,7 +14,7 @@ test('proto pollution (array)', function (t) {
     t.equal({}.z, undefined);
     t.deepEqual(argv.x, [4,5]);
     t.equal(argv.x.z, undefined);
-    t.equal(argv.x.__proto__.z, 789);
+    t.equal(argv.x.__proto__.z, undefined);
     t.end();
 });
 
