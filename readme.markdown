@@ -29,6 +29,13 @@ $ node example/parse.js -x 3 -y 4 -n5 -abc --beep=boop foo bar baz
   beep: 'boop' }
 ```
 
+# security
+
+Previous versions had a prototype pollution bug that could cause privilege
+escalation in some circumstances when handling untrusted user input.
+
+Please use version 1.2.3 or later: https://snyk.io/vuln/SNYK-JS-MINIMIST-559764
+
 # methods
 
 ``` js
