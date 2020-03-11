@@ -35,3 +35,10 @@ test('proto pollution (string)', function (t) {
     t.equal(argv.x.z, undefined);
     t.end();
 });
+
+test('proto pollution (constructor)', function (t) {
+    var argv = parse(['--constructor.prototype.y','123']);
+    t.equal({}.y, undefined);
+    t.equal(argv.y, undefined);
+    t.end();
+});
