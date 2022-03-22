@@ -6,6 +6,10 @@ function isNumber(x) {
 	return (/^[-+]?(?:\d+(?:\.\d*)?|\.\d+)(e[-+]?\d+)?$/).test(x);
 }
 
+function isConstructorOrProto(obj, key) {
+	return key === 'constructor' && (typeof obj[key] === 'function' || key === '__proto__');
+}
+
 function hasKey(obj, keys) {
 	var o = obj;
 	keys.slice(0, -1).forEach(function (key) {
@@ -21,7 +25,9 @@ function setKey(obj, keys, value) {
 	var key;
 	for (var i = 0; i < keys.length - 1; i++) {
 		key = keys[i];
-		if (key === '__proto__') { return; }
+		if (key === '__proto__' || isConstructorOrProto(o, key)) {
+			return;
+		}
 		if (o[key] === undefined) { o[key] = {}; }
 		if (
 			o[key] === Object.prototype
