@@ -4,11 +4,12 @@
     "description": "parse argument options",
     "main": "index.js",
     "devDependencies": {
+        "nyc": "^10.3.2",
         "tape": "^5.6.1"
     },
     "scripts": {
         "prepack": "npmignore --auto --commentLines=auto",
-        "test": "tape test/*.js"
+        "test": "nyc tape test/*.js"
     },
     "testling": {
         "files": "test/*.js",
