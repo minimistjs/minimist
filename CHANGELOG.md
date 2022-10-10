@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.2.7](https://github.com/minimistjs/minimist/compare/v1.2.6...v1.2.7) - 2022-10-10
+
+### Commits
+
+- [meta] add `auto-changelog` [`0ebf4eb`](https://github.com/minimistjs/minimist/commit/0ebf4ebcd5f7787a5524d31a849ef41316b83c3c)
+- [actions] add reusable workflows [`e115b63`](https://github.com/minimistjs/minimist/commit/e115b63fa9d3909f33b00a2db647ff79068388de)
+- [eslint] add eslint; rules to enable later are warnings [`f58745b`](https://github.com/minimistjs/minimist/commit/f58745b9bb84348e1be72af7dbba5840c7c13013)
+- [Dev Deps] switch from `covert` to `nyc` [`ab03356`](https://github.com/minimistjs/minimist/commit/ab033567b9c8b31117cb026dc7f1e592ce455c65)
+- [readme] rename and add badges [`236f4a0`](https://github.com/minimistjs/minimist/commit/236f4a07e4ebe5ee44f1496ec6974991ab293ffd)
+- [meta] create FUNDING.yml; add `funding` in package.json [`783a49b`](https://github.com/minimistjs/minimist/commit/783a49bfd47e8335d3098a8cac75662cf71eb32a)
+- [meta] use `npmignore` to autogenerate an npmignore file [`f81ece6`](https://github.com/minimistjs/minimist/commit/f81ece6aaec2fa14e69ff4f1e0407a8c4e2635a2)
+- Only apps should have lockfiles [`56cad44`](https://github.com/minimistjs/minimist/commit/56cad44c7f879b9bb5ec18fcc349308024a89bfc)
+- [Dev Deps] update `covert`, `tape`; remove unnecessary `tap` [`49c5f9f`](https://github.com/minimistjs/minimist/commit/49c5f9fb7e6a92db9eb340cc679de92fb3aacded)
+- [Tests] add `aud` in `posttest` [`228ae93`](https://github.com/minimistjs/minimist/commit/228ae938f3cd9db9dfd8bd7458b076a7b2aef280)
+- [meta] add `safe-publish-latest` [`01fc23f`](https://github.com/minimistjs/minimist/commit/01fc23f5104f85c75059972e01dd33796ab529ff)
+- [meta] update repo URLs [`6b164c7`](https://github.com/minimistjs/minimist/commit/6b164c7d68e0b6bf32f894699effdfb7c63041dd)
+
 ## [v1.2.6](https://github.com/minimistjs/minimist/compare/v1.2.5...v1.2.6) - 2022-03-21
 
 ### Commits
