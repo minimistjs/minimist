@@ -4,14 +4,13 @@
   "description": "parse argument options",
   "main": "index.js",
   "devDependencies": {
-    "covert": "^1.0.0",
+    "covert": "^1.1.1",
     "npmignore": "^0.3.0",
-    "tap": "~0.4.0",
-    "tape": "^3.5.0"
+    "tape": "^5.6.1"
   },
   "scripts": {
     "prepack": "npmignore --auto --commentLines=auto",
-    "test": "tap test/*.js",
+    "test": "tape test/*.js",
     "coverage": "covert test/*.js"
   },
   "testling": {
