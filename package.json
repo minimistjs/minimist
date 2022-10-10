@@ -8,6 +8,7 @@
         "tap": "~0.4.0"
     },
     "scripts": {
+        "prepack": "npmignore --auto --commentLines=auto",
         "test": "tap test/*.js"
     },
     "testling" : {
@@ -36,5 +37,10 @@
         "email": "mail@substack.net",
         "url": "http://substack.net"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "publishConfig": {
+        "ignore": [
+            ".github/workflows"
+        ]
+    }
 }
