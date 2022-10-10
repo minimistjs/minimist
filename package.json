@@ -5,10 +5,12 @@
   "main": "index.js",
   "devDependencies": {
     "covert": "^1.0.0",
+    "npmignore": "^0.3.0",
     "tap": "~0.4.0",
     "tape": "^3.5.0"
   },
   "scripts": {
+    "prepack": "npmignore --auto --commentLines=auto",
     "test": "tap test/*.js",
     "coverage": "covert test/*.js"
   },
@@ -41,5 +43,10 @@
     "email": "mail@substack.net",
     "url": "http://substack.net"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "ignore": [
+      ".github/workflows"
+    ]
+  }
 }
