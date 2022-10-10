@@ -22,9 +22,9 @@
     },
     "repository": {
         "type": "git",
-        "url": "git://github.com/substack/minimist.git"
+        "url": "git://github.com/minimistjs/minimist.git"
     },
-    "homepage": "https://github.com/substack/minimist",
+    "homepage": "https://github.com/minimistjs/minimist",
     "keywords": [
         "argv",
         "getopt",
