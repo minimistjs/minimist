@@ -4,13 +4,16 @@
   "description": "parse argument options",
   "main": "index.js",
   "devDependencies": {
+    "aud": "^2.0.1",
     "npmignore": "^0.3.0",
     "nyc": "^10.3.2",
     "tape": "^5.6.1"
   },
   "scripts": {
     "prepack": "npmignore --auto --commentLines=auto",
-    "test": "nyc tape test/*.js"
+    "tests-only": "nyc tape test/*.js",
+    "test": "npm run tests-only",
+    "posttest": "aud --production"
   },
   "testling": {
     "files": "test/*.js",
