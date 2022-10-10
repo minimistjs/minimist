@@ -6,6 +6,7 @@
   "devDependencies": {
     "@ljharb/eslint-config": "^21.0.0",
     "aud": "^2.0.1",
+    "auto-changelog": "^2.4.0",
     "eslint": "=8.8.0",
     "in-publish": "^2.0.1",
     "npmignore": "^0.3.0",
@@ -21,7 +22,9 @@
     "pretest": "npm run lint",
     "tests-only": "nyc tape test/*.js",
     "test": "npm run tests-only",
-    "posttest": "aud --production"
+    "posttest": "aud --production",
+    "version": "auto-changelog && git add CHANGELOG.md",
+    "postversion": "auto-changelog && git add CHANGELOG.md && git commit --no-edit --amend && git tag -f \"v$(node -e \"console.log(require('./package.json').version)\")\""
   },
   "testling": {
     "files": "test/*.js",
@@ -56,6 +59,14 @@
     "url": "https://github.com/sponsors/ljharb"
   },
   "license": "MIT",
+  "auto-changelog": {
+    "output": "CHANGELOG.md",
+    "template": "keepachangelog",
+    "unreleased": false,
+    "commitLimit": false,
+    "backfillLimit": false,
+    "hideCredit": true
+  },
   "publishConfig": {
     "ignore": [
       ".github/workflows"
