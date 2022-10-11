@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.2.7](https://github.com/minimistjs/minimist/compare/v1.2.6...v1.2.7) - 2022-10-10
+
+### Commits
+
+- [meta] add `auto-changelog` [`0ebf4eb`](https://github.com/minimistjs/minimist/commit/0ebf4ebcd5f7787a5524d31a849ef41316b83c3c)
+- [actions] add reusable workflows [`e115b63`](https://github.com/minimistjs/minimist/commit/e115b63fa9d3909f33b00a2db647ff79068388de)
+- [eslint] add eslint; rules to enable later are warnings [`f58745b`](https://github.com/minimistjs/minimist/commit/f58745b9bb84348e1be72af7dbba5840c7c13013)
+- [Dev Deps] switch from `covert` to `nyc` [`ab03356`](https://github.com/minimistjs/minimist/commit/ab033567b9c8b31117cb026dc7f1e592ce455c65)
+- [readme] rename and add badges [`236f4a0`](https://github.com/minimistjs/minimist/commit/236f4a07e4ebe5ee44f1496ec6974991ab293ffd)
+- [meta] create FUNDING.yml; add `funding` in package.json [`783a49b`](https://github.com/minimistjs/minimist/commit/783a49bfd47e8335d3098a8cac75662cf71eb32a)
+- [meta] use `npmignore` to autogenerate an npmignore file [`f81ece6`](https://github.com/minimistjs/minimist/commit/f81ece6aaec2fa14e69ff4f1e0407a8c4e2635a2)
+- Only apps should have lockfiles [`56cad44`](https://github.com/minimistjs/minimist/commit/56cad44c7f879b9bb5ec18fcc349308024a89bfc)
+- [Dev Deps] update `covert`, `tape`; remove unnecessary `tap` [`49c5f9f`](https://github.com/minimistjs/minimist/commit/49c5f9fb7e6a92db9eb340cc679de92fb3aacded)
+- [Tests] add `aud` in `posttest` [`228ae93`](https://github.com/minimistjs/minimist/commit/228ae938f3cd9db9dfd8bd7458b076a7b2aef280)
+- [meta] add `safe-publish-latest` [`01fc23f`](https://github.com/minimistjs/minimist/commit/01fc23f5104f85c75059972e01dd33796ab529ff)
+- [meta] update repo URLs [`6b164c7`](https://github.com/minimistjs/minimist/commit/6b164c7d68e0b6bf32f894699effdfb7c63041dd)
+
 ## [v1.2.6](https://github.com/minimistjs/minimist/compare/v1.2.5...v1.2.6) - 2022-03-21
 
 ### Commits
@@ -92,12 +109,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - coverage script [`e5531ba`](https://github.com/minimistjs/minimist/commit/e5531ba0479da3b8138d3d8cac545d84ccb1c8df)
 - extra fn to get 100% coverage again [`a6972da`](https://github.com/minimistjs/minimist/commit/a6972da89e56bf77642f8ec05a13b6558db93498)
 
-## [v1.0.0](https://github.com/minimistjs/minimist/compare/v0.2.1...v1.0.0) - 2014-08-10
+## [v1.0.0](https://github.com/minimistjs/minimist/compare/v0.2.2...v1.0.0) - 2014-08-10
 
 ### Commits
 
 - added stopEarly option [`471c7e4`](https://github.com/minimistjs/minimist/commit/471c7e4a7e910fc7ad8f9df850a186daf32c64e9)
 - fix list [`fef6ae7`](https://github.com/minimistjs/minimist/commit/fef6ae79c38b9dc1c49569abb7cd04eb965eac5e)
+
+## [v0.2.2](https://github.com/minimistjs/minimist/compare/v0.2.1...v0.2.2) - 2022-10-10
+
+### Commits
+
+- [meta] add `auto-changelog` [`73923d2`](https://github.com/minimistjs/minimist/commit/73923d223553fca08b1ba77e3fbc2a492862ae4c)
+- [actions] add reusable workflows [`d80727d`](https://github.com/minimistjs/minimist/commit/d80727df77bfa9e631044d7f16368d8f09242c91)
+- [eslint] add eslint; rules to enable later are warnings [`48bc06a`](https://github.com/minimistjs/minimist/commit/48bc06a1b41f00e9cdf183db34f7a51ba70e98d4)
+- [readme] rename and add badges [`5df0fe4`](https://github.com/minimistjs/minimist/commit/5df0fe49211bd09a3636f8686a7cb3012c3e98f0)
+- [Dev Deps] switch from `covert` to `nyc` [`a48b128`](https://github.com/minimistjs/minimist/commit/a48b128fdb8d427dfb20a15273f83e38d97bef07)
+- [Dev Deps] update `covert`, `tape`; remove unnecessary `tap` [`f0fb958`](https://github.com/minimistjs/minimist/commit/f0fb958e9a1fe980cdffc436a211b0bda58f621b)
+- [meta] create FUNDING.yml; add `funding` in package.json [`3639e0c`](https://github.com/minimistjs/minimist/commit/3639e0c819359a366387e425ab6eabf4c78d3caa)
+- [meta] use `npmignore` to autogenerate an npmignore file [`be2e038`](https://github.com/minimistjs/minimist/commit/be2e038c342d8333b32f0fde67a0026b79c8150e)
+- Only apps should have lockfiles [`282b570`](https://github.com/minimistjs/minimist/commit/282b570e7489d01b03f2d6d3dabf79cd3e5f84cf)
+- [meta] add `safe-publish-latest` [`4b927de`](https://github.com/minimistjs/minimist/commit/4b927de696d561c636b4f43bf49d4597cb36d6d6)
+- [Tests] add `aud` in `posttest` [`b32d9bd`](https://github.com/minimistjs/minimist/commit/b32d9bd0ab340f4e9f8c3a97ff2a4424f25fab8c)
+- [meta] update repo URLs [`f9fdfc0`](https://github.com/minimistjs/minimist/commit/f9fdfc032c54884d9a9996a390c63cd0719bbe1a)
 
 ## [v0.2.1](https://github.com/minimistjs/minimist/compare/v0.2.0...v0.2.1) - 2020-03-12
 
