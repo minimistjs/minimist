@@ -1,5 +1,9 @@
+'use strict';
+
 var parse = require('../');
 var test = require('tape');
+
+/* eslint no-proto: 0 */
 
 test('proto pollution', function (t) {
 	var argv = parse(['--__proto__.x', '123']);

@@ -1,16 +1,18 @@
+'use strict';
+
 var parse = require('../');
 var test = require('tape');
 
 test('flag boolean default false', function (t) {
 	var argv = parse(['moo'], {
 		boolean: ['t', 'verbose'],
-		default: { verbose: false, t: false }
+		default: { verbose: false, t: false },
 	});
 
 	t.deepEqual(argv, {
 		verbose: false,
 		t: false,
-		_: ['moo']
+		_: ['moo'],
 	});
 
 	t.deepEqual(typeof argv.verbose, 'boolean');
@@ -21,14 +23,14 @@ test('flag boolean default false', function (t) {
 
 test('boolean groups', function (t) {
 	var argv = parse(['-x', '-z', 'one', 'two', 'three'], {
-		boolean: ['x', 'y', 'z']
+		boolean: ['x', 'y', 'z'],
 	});
 
 	t.deepEqual(argv, {
 		x: true,
 		y: false,
 		z: true,
-		_: ['one', 'two', 'three']
+		_: ['one', 'two', 'three'],
 	});
 
 	t.deepEqual(typeof argv.x, 'boolean');
@@ -39,21 +41,19 @@ test('boolean groups', function (t) {
 test('boolean and alias with chainable api', function (t) {
 	var aliased = ['-h', 'derp'];
 	var regular = ['--herp', 'derp'];
-	var opts = {
-		herp: { alias: 'h', boolean: true }
-	};
+
 	var aliasedArgv = parse(aliased, {
 		boolean: 'herp',
-		alias: { h: 'herp' }
+		alias: { h: 'herp' },
 	});
 	var propertyArgv = parse(regular, {
 		boolean: 'herp',
-		alias: { h: 'herp' }
+		alias: { h: 'herp' },
 	});
 	var expected = {
 		herp: true,
 		h: true,
-		'_': ['derp']
+		_: ['derp'],
 	};
 
 	t.same(aliasedArgv, expected);
@@ -65,15 +65,15 @@ test('boolean and alias with options hash', function (t) {
 	var aliased = ['-h', 'derp'];
 	var regular = ['--herp', 'derp'];
 	var opts = {
-		alias: { 'h': 'herp' },
-		boolean: 'herp'
+		alias: { h: 'herp' },
+		boolean: 'herp',
 	};
 	var aliasedArgv = parse(aliased, opts);
 	var propertyArgv = parse(regular, opts);
 	var expected = {
 		herp: true,
 		h: true,
-		'_': ['derp']
+		_: ['derp'],
 	};
 	t.same(aliasedArgv, expected);
 	t.same(propertyArgv, expected);
@@ -85,14 +85,14 @@ test('boolean and alias using explicit true', function (t) {
 	var regular = ['--herp', 'true'];
 	var opts = {
 		alias: { h: 'herp' },
-		boolean: 'h'
+		boolean: 'h',
 	};
 	var aliasedArgv = parse(aliased, opts);
 	var propertyArgv = parse(regular, opts);
 	var expected = {
 		herp: true,
 		h: true,
-		'_': []
+		_: [],
 	};
 
 	t.same(aliasedArgv, expected);
@@ -103,14 +103,14 @@ test('boolean and alias using explicit true', function (t) {
 // regression, see https://github.com/substack/node-optimist/issues/71
 test('boolean and --x=true', function (t) {
 	var parsed = parse(['--boool', '--other=true'], {
-		boolean: 'boool'
+		boolean: 'boool',
 	});
 
 	t.same(parsed.boool, true);
 	t.same(parsed.other, 'true');
 
 	parsed = parse(['--boool', '--other=false'], {
-		boolean: 'boool'
+		boolean: 'boool',
 	});
 
 	t.same(parsed.boool, true);
