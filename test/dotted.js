@@ -1,3 +1,5 @@
+'use strict';
+
 var parse = require('../');
 var test = require('tape');
 

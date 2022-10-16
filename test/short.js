@@ -1,3 +1,5 @@
+'use strict';
+
 var parse = require('../');
 var test = require('tape');
 
@@ -49,7 +51,7 @@ test('mixed short bool and capture', function (t) {
 		parse(['-h', 'localhost', '-fp', '555', 'script.js']),
 		{
 			f: true, p: 555, h: 'localhost',
-			_: ['script.js']
+			_: ['script.js'],
 		}
 	);
 	t.end();
@@ -60,7 +62,7 @@ test('short and long', function (t) {
 		parse(['-h', 'localhost', '-fp', '555', 'script.js']),
 		{
 			f: true, p: 555, h: 'localhost',
-			_: ['script.js']
+			_: ['script.js'],
 		}
 	);
 	t.end();

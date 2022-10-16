@@ -1,3 +1,7 @@
+'use strict';
+
+/* eslint no-proto: 0 */
+
 var parse = require('../');
 var test = require('tape');
 
@@ -54,7 +58,7 @@ test('proto pollution (constructor function)', function (t) {
 // powered by snyk - https://github.com/backstage/backstage/issues/10343
 test('proto pollution (constructor function) snyk', function (t) {
 	var argv = parse('--_.constructor.constructor.prototype.foo bar'.split(' '));
-	t.equal((function () {}).foo, undefined);
+	t.equal(function () {}.foo, undefined);
 	t.equal(argv.y, undefined);
 	t.end();
-})
+});
