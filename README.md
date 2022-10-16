@@ -30,14 +30,16 @@ $ node example/parse.js -a beep -b boop
 
 ```
 $ node example/parse.js -x 3 -y 4 -n5 -abc --beep=boop foo bar baz
-{ _: [ 'foo', 'bar', 'baz' ],
-  x: 3,
-  y: 4,
-  n: 5,
-  a: true,
-  b: true,
-  c: true,
-  beep: 'boop' }
+{
+	_: ['foo', 'bar', 'baz'],
+	x: 3,
+	y: 4,
+	n: 5,
+	a: true,
+	b: true,
+	c: true,
+	beep: 'boop'
+}
 ```
 
 # methods
@@ -71,10 +73,12 @@ argument names to use as aliases
 * `opts['--']` - when true, populate `argv._` with everything before the `--`
 and `argv['--']` with everything after the `--`. Here's an example:
 
-```
+```sh
 > require('./')('one two three -- four five --six'.split(' '), { '--': true })
-{ _: [ 'one', 'two', 'three' ],
-  '--': [ 'four', 'five', '--six' ] }
+{
+	_: ['one', 'two', 'three'],
+	'--': ['four', 'five', '--six'],
+}
 ```
 
 Note that with `opts['--']` set, parsing for arguments still stops after the
