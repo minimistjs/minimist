@@ -142,6 +142,17 @@ test('string and alias', function (t) {
 	t.equal(typeof y.str, 'string');
 	t.equal(y.s, '000123');
 	t.equal(typeof y.s, 'string');
+
+	var z = parse(['-s123'], {
+		alias: { str: ['s', 'S'] },
+		string: ['str'],
+	});
+
+	t.deepEqual(
+		z,
+		{ _: [], s: '123', S: '123', str: '123' },
+		'opt.string works with multiple aliases'
+	);
 	t.end();
 });
 

@@ -19,7 +19,7 @@
 		"prepublish": "not-in-publish || npm run prepublishOnly",
 		"lint": "eslint --ext=js,mjs .",
 		"pretest": "npm run lint",
-		"tests-only": "nyc tape test/*.js",
+		"tests-only": "nyc tape 'test/**/*.js'",
 		"test": "npm run tests-only",
 		"posttest": "aud --production",
 		"version": "auto-changelog && git add CHANGELOG.md",
