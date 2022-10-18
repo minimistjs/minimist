@@ -61,7 +61,9 @@ module.exports = function (args, opts) {
 	[].concat(opts.string).filter(Boolean).forEach(function (key) {
 		flags.strings[key] = true;
 		if (aliases[key]) {
-			flags.strings[aliases[key]] = true;
+			[].concat(aliases[key]).forEach(function (k) {
+				flags.strings[k] = true;
+			});
 		}
 	});
 
