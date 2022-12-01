@@ -20,7 +20,7 @@ function isConstructorOrProto(obj, key) {
 	return (key === 'constructor' && typeof obj[key] === 'function') || key === '__proto__';
 }
 
-module.exports = function (args, opts) {
+function minimist(args, opts) {
 	if (!opts) { opts = {}; }
 
 	var flags = {
@@ -260,4 +260,8 @@ module.exports = function (args, opts) {
 	}
 
 	return argv;
-};
+}
+
+module.exports = minimist;
+module.exports.default = minimist;
+module.exports.minimist = minimist;
