@@ -164,7 +164,7 @@ module.exports = function (args, opts) {
 			next = args[i + 1];
 			if (
 				next !== undefined
-				&& !(/^-/).test(next)
+				&& !(/^(-|--)[^-]/).test(next)
 				&& !flags.bools[key]
 				&& !flags.allBools
 				&& (aliases[key] ? !aliasIsBoolean(key) : true)
