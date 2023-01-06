@@ -9,6 +9,7 @@
 		"auto-changelog": "^2.4.0",
 		"eslint": "=8.8.0",
 		"in-publish": "^2.0.1",
+		"npmignore": "^0.3.0",
 		"nyc": "^10.3.2",
 		"safe-publish-latest": "^2.0.0",
 		"tape": "^5.6.1"
