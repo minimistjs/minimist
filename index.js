@@ -32,7 +32,7 @@ function setKey(obj, keys, value) {
 		if (
 			o[key] === Object.prototype
 			|| o[key] === Number.prototype
-            || o[key] === String.prototype
+			|| o[key] === String.prototype
 		) {
 			o[key] = {};
 		}
@@ -45,7 +45,7 @@ function setKey(obj, keys, value) {
 	if (
 		o === Object.prototype
 		|| o === Number.prototype
-        || o === String.prototype
+		|| o === String.prototype
 	) {
 		o = {};
 	}
@@ -134,10 +134,13 @@ module.exports = function (args, opts) {
 		} else if ((/^--.+/).test(arg)) {
 			key = arg.match(/^--(.+)/)[1];
 			next = args[i + 1];
-			if (next !== undefined && !(/^-/).test(next)
-            && !flags.bools[key]
-            && !flags.allBools
-            && (aliases[key] ? !flags.bools[aliases[key]] : true)) {
+			if (
+				next !== undefined
+				&& !(/^-/).test(next)
+				&& !flags.bools[key]
+				&& !flags.allBools
+				&& (aliases[key] ? !flags.bools[aliases[key]] : true)
+			) {
 				setArg(key, next);
 				i += 1;
 			} else if ((/^(true|false)$/).test(next)) {
@@ -158,8 +161,10 @@ module.exports = function (args, opts) {
 					continue;
 				}
 
-				if ((/[A-Za-z]/).test(letters[j])
-                && (/-?\d+(\.\d*)?(e-?\d+)?$/).test(next)) {
+				if (
+					(/[A-Za-z]/).test(letters[j])
+					&& (/-?\d+(\.\d*)?(e-?\d+)?$/).test(next)
+				) {
 					setArg(letters[j], next);
 					broken = true;
 					break;
@@ -176,9 +181,12 @@ module.exports = function (args, opts) {
 
 			key = arg.slice(-1)[0];
 			if (!broken && key !== '-') {
-				if (args[i + 1] && !(/^(-|--)[^-]/).test(args[i + 1])
-                && !flags.bools[key]
-                && (aliases[key] ? !flags.bools[aliases[key]] : true)) {
+				if (
+					args[i + 1]
+					&& !(/^(-|--)[^-]/).test(args[i + 1])
+					&& !flags.bools[key]
+					&& (aliases[key] ? !flags.bools[aliases[key]] : true)
+				) {
 					setArg(key, args[i + 1]);
 					i += 1;
 				} else if (args[i + 1] && (/true|false/).test(args[i + 1])) {
