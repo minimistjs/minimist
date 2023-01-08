@@ -189,8 +189,8 @@ module.exports = function (args, opts) {
 					continue;
 				}
 
-				if ((/[A-Za-z]/).test(letters[j]) && (/[=]/).test(next)) {
-					setArg(letters[j], next.split('=')[1], arg);
+				if ((/[A-Za-z]/).test(letters[j]) && next[0] === '=') {
+					setArg(letters[j], next.slice(1), arg);
 					broken = true;
 					break;
 				}
