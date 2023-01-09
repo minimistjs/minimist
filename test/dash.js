@@ -4,9 +4,11 @@ var parse = require('../');
 var test = require('tape');
 
 test('-', function (t) {
-	t.plan(6);
+	t.plan(8);
 	t.deepEqual(parse(['-n', '-']), { n: '-', _: [] });
 	t.deepEqual(parse(['--nnn', '-']), { nnn: '-', _: [] });
+	t.deepEqual(parse(['-n', '---']), { n: '---', _: [] });
+	t.deepEqual(parse(['--nnn', '---']), { nnn: '---', _: [] });
 	t.deepEqual(parse(['-']), { _: ['-'] });
 	t.deepEqual(parse(['-f-']), { f: '-', _: [] });
 	t.deepEqual(
