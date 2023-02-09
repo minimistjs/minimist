@@ -109,12 +109,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - coverage script [`e5531ba`](https://github.com/minimistjs/minimist/commit/e5531ba0479da3b8138d3d8cac545d84ccb1c8df)
 - extra fn to get 100% coverage again [`a6972da`](https://github.com/minimistjs/minimist/commit/a6972da89e56bf77642f8ec05a13b6558db93498)
 
-## [v1.0.0](https://github.com/minimistjs/minimist/compare/v0.2.2...v1.0.0) - 2014-08-10
+## [v1.0.0](https://github.com/minimistjs/minimist/compare/v0.2.3...v1.0.0) - 2014-08-10
 
 ### Commits
 
 - added stopEarly option [`471c7e4`](https://github.com/minimistjs/minimist/commit/471c7e4a7e910fc7ad8f9df850a186daf32c64e9)
 - fix list [`fef6ae7`](https://github.com/minimistjs/minimist/commit/fef6ae79c38b9dc1c49569abb7cd04eb965eac5e)
+
+## [v0.2.3](https://github.com/minimistjs/minimist/compare/v0.2.2...v0.2.3) - 2023-02-09
+
+### Merged
+
+- [Fix] Fix long option followed by single dash [`#17`](https://github.com/minimistjs/minimist/pull/17)
+- [Tests] Remove duplicate test [`#12`](https://github.com/minimistjs/minimist/pull/12)
+- [Fix] opt.string works with multiple aliases [`#10`](https://github.com/minimistjs/minimist/pull/10)
+
+### Fixed
+
+- [Fix] Fix long option followed by single dash (#17) [`#15`](https://github.com/minimistjs/minimist/issues/15)
+- [Tests] Remove duplicate test (#12) [`#8`](https://github.com/minimistjs/minimist/issues/8)
+- [Fix] opt.string works with multiple aliases (#10) [`#9`](https://github.com/minimistjs/minimist/issues/9)
+
+### Commits
+
+- [eslint] fix indentation and whitespace [`e5f5067`](https://github.com/minimistjs/minimist/commit/e5f5067259ceeaf0b098d14bec910f87e58708c7)
+- [eslint] more cleanup [`36ac5d0`](https://github.com/minimistjs/minimist/commit/36ac5d0d95e4947d074e5737d94814034ca335d1)
+- [eslint] fix indentation [`34b0f1c`](https://github.com/minimistjs/minimist/commit/34b0f1ccaa45183c3c4f06a91f9b405180a6f982)
+- isConstructorOrProto adapted from PR [`ef9153f`](https://github.com/minimistjs/minimist/commit/ef9153fc52b6cea0744b2239921c5dcae4697f11)
+- [Dev Deps] update `@ljharb/eslint-config`, `aud` [`098873c`](https://github.com/minimistjs/minimist/commit/098873c213cdb7c92e55ae1ef5aa1af3a8192a79)
+- [Dev Deps] add missing `npmignore` dev dep [`3226afa`](https://github.com/minimistjs/minimist/commit/3226afaf09e9d127ca369742437fe6e88f752d6b)
 
 ## [v0.2.2](https://github.com/minimistjs/minimist/compare/v0.2.1...v0.2.2) - 2022-10-10
 
