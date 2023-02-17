@@ -7,7 +7,7 @@ function isNumber(x) {
 }
 
 function isConstructorOrProto(obj, key) {
-	return key === 'constructor' && (typeof obj[key] === 'function' || key === '__proto__');
+	return (key === 'constructor' && typeof obj[key] === 'function') || key === '__proto__';
 }
 
 function hasKey(obj, keys) {
@@ -25,7 +25,7 @@ function setKey(obj, keys, value) {
 	var key;
 	for (var i = 0; i < keys.length - 1; i++) {
 		key = keys[i];
-		if (key === '__proto__' || isConstructorOrProto(o, key)) {
+		if (isConstructorOrProto(o, key)) {
 			return;
 		}
 		if (o[key] === undefined) { o[key] = {}; }
@@ -41,7 +41,7 @@ function setKey(obj, keys, value) {
 	}
 
 	key = keys[keys.length - 1];
-	if (key === '__proto__') { return; }
+	if (isConstructorOrProto(o, key)) { return; }
 	if (
 		o === Object.prototype
 		|| o === Number.prototype
