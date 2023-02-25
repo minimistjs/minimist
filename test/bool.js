@@ -38,27 +38,6 @@ test('boolean groups', function (t) {
 	t.deepEqual(typeof argv.z, 'boolean');
 	t.end();
 });
-test('boolean and alias with chainable api', function (t) {
-	var aliased = ['-h', 'derp'];
-	var regular = ['--herp', 'derp'];
-	var aliasedArgv = parse(aliased, {
-		boolean: 'herp',
-		alias: { h: 'herp' },
-	});
-	var propertyArgv = parse(regular, {
-		boolean: 'herp',
-		alias: { h: 'herp' },
-	});
-	var expected = {
-		herp: true,
-		h: true,
-		_: ['derp'],
-	};
-
-	t.same(aliasedArgv, expected);
-	t.same(propertyArgv, expected);
-	t.end();
-});
 
 test('boolean and alias with options hash', function (t) {
 	var aliased = ['-h', 'derp'];
