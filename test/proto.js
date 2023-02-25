@@ -5,6 +5,22 @@
 var parse = require('../');
 var test = require('tape');
 
+/* eslint no-proto: 0 */
+
+// Not pollution as such, but verify protections working as intended.
+test('trailing __proto__ key in dotted option ignored', function (t) {
+	var argv = parse(['--a.__proto__', 'IGNORED']);
+	t.deepEqual(argv.a, {});
+	t.end();
+});
+
+// Not pollution as such, but verify protections working as intended.
+test('trailing constructor key in dotted option ignored', function (t) {
+	var argv = parse(['--a.constructor', 'IGNORED']);
+	t.deepEqual(argv.a, {});
+	t.end();
+});
+
 test('proto pollution', function (t) {
 	var argv = parse(['--__proto__.x', '123']);
 	t.equal({}.x, undefined);

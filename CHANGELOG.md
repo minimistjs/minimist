@@ -155,12 +155,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - coverage script [`e5531ba`](https://github.com/minimistjs/minimist/commit/e5531ba0479da3b8138d3d8cac545d84ccb1c8df)
 - extra fn to get 100% coverage again [`a6972da`](https://github.com/minimistjs/minimist/commit/a6972da89e56bf77642f8ec05a13b6558db93498)
 
-## [v1.0.0](https://github.com/minimistjs/minimist/compare/v0.2.3...v1.0.0) - 2014-08-10
+## [v1.0.0](https://github.com/minimistjs/minimist/compare/v0.2.4...v1.0.0) - 2014-08-10
 
 ### Commits
 
 - added stopEarly option [`471c7e4`](https://github.com/minimistjs/minimist/commit/471c7e4a7e910fc7ad8f9df850a186daf32c64e9)
 - fix list [`fef6ae7`](https://github.com/minimistjs/minimist/commit/fef6ae79c38b9dc1c49569abb7cd04eb965eac5e)
+
+## [v0.2.4](https://github.com/minimistjs/minimist/compare/v0.2.3...v0.2.4) - 2023-02-24
+
+### Commits
+
+- [Tests] check side-effects of pollution protection [`3dbebff`](https://github.com/minimistjs/minimist/commit/3dbebff0f4436cf946cb6c1e6db606f4b9bded4f)
+- [Robustness] rework isConstructorOrProto [`34e20b8`](https://github.com/minimistjs/minimist/commit/34e20b8461118608703d6485326abbb8e35e1703)
+- [Dev Deps] update `tape` [`d031f9b`](https://github.com/minimistjs/minimist/commit/d031f9bf57a620b834ab5a8f1b4e027b67904a60)
 
 ## [v0.2.3](https://github.com/minimistjs/minimist/compare/v0.2.2...v0.2.3) - 2023-02-09
 
