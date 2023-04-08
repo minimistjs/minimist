@@ -154,3 +154,19 @@ test('boolean using something similar to true', function (t) {
 	t.same(result, expected);
 	t.end();
 });
+
+test('supplied default for boolean using alias', function (t) {
+	var argv = parse(['moo'], {
+		boolean: ['bool'],
+		alias: { bool: 'b' },
+		default: { b: true },
+	});
+
+	t.deepEqual(argv, {
+		bool: true,
+		b: true,
+		_: ['moo'],
+	});
+
+	t.end();
+});

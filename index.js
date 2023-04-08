@@ -135,10 +135,14 @@ module.exports = function (args, opts) {
 		});
 	}
 
+	// Set booleans to false by default.
 	Object.keys(flags.bools).forEach(function (key) {
-		setArg(key, defaults[key] === undefined ? false : defaults[key]);
+		setArg(key, false);
 	});
-
+	// Set booleans to user defined default if supplied.
+	Object.keys(defaults).filter(isBooleanKey).forEach(function (key) {
+		setArg(key, defaults[key]);
+	});
 	var notFlags = [];
 
 	if (args.indexOf('--') !== -1) {
