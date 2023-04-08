@@ -162,7 +162,7 @@ module.exports = function (args, opts) {
 			var m = arg.match(/^--([^=]+)=([\s\S]*)$/);
 			key = m[1];
 			var value = m[2];
-			if (flags.bools[key]) {
+			if (isBooleanKey(key)) {
 				value = value !== 'false';
 			}
 			setArg(key, value, arg);

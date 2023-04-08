@@ -167,6 +167,18 @@ test('supplied default for boolean using alias', function (t) {
 		b: true,
 		_: ['moo'],
 	});
+	t.end();
+});
 
+test('boolean and alias --boool=false', function (t) {
+	var parsed = parse(['--boool=false'], {
+		default: {
+			b: true,
+		},
+		alias: { b: 'boool' },
+		boolean: ['b'],
+	});
+
+	t.same(parsed.boool, false);
 	t.end();
 });
