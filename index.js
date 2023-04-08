@@ -43,7 +43,13 @@ module.exports = function (args, opts) {
 
 	var aliases = {};
 
-	function aliasIsBoolean(key) {
+	function isBooleanKey(key) {
+		if (flags.bools[key]) {
+			return true;
+		}
+		if (!aliases[key]) {
+			return false;
+		}
 		return aliases[key].some(function (x) {
 			return flags.bools[x];
 		});
@@ -165,9 +171,8 @@ module.exports = function (args, opts) {
 			if (
 				next !== undefined
 				&& !(/^(-|--)[^-]/).test(next)
-				&& !flags.bools[key]
+				&& !isBooleanKey(key)
 				&& !flags.allBools
-				&& (aliases[key] ? !aliasIsBoolean(key) : true)
 			) {
 				setArg(key, next, arg);
 				i += 1;
@@ -218,8 +223,7 @@ module.exports = function (args, opts) {
 				if (
 					args[i + 1]
 					&& !(/^(-|--)[^-]/).test(args[i + 1])
-					&& !flags.bools[key]
-					&& (aliases[key] ? !aliasIsBoolean(key) : true)
+					&& !isBooleanKey(key)
 				) {
 					setArg(key, args[i + 1], arg);
 					i += 1;
