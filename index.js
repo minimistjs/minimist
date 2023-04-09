@@ -111,7 +111,7 @@ module.exports = function (args, opts) {
 			o = {};
 		}
 		if (o === Array.prototype) { o = []; }
-		if (o[lastKey] === undefined || flags.bools[lastKey] || typeof o[lastKey] === 'boolean') {
+		if (o[lastKey] === undefined || isBooleanKey(lastKey) || typeof o[lastKey] === 'boolean') {
 			o[lastKey] = value;
 		} else if (Array.isArray(o[lastKey])) {
 			o[lastKey].push(value);
