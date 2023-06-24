@@ -121,15 +121,33 @@ module.exports = function (args, opts) {
 	}
 
 	function setArg(key, val, arg) {
+		// validation
 		if (arg && flags.unknownFn && !argDefined(key, arg)) {
 			if (flags.unknownFn(arg) === false) { return; }
 		}
+		if (opts.strict) {
+			if (flags.strings[key] && val === true) {
+				throw new Error('Missing option value for option "' + key + '"');
+			}
+			if (isBooleanKey(key) && typeof val === 'string' && !(/^(true|false)$/).test(val)) {
+				throw new Error('Unexpected option value for option "' + key + '"');
+			}
+		}
 
-		var value = !flags.strings[key] && isNumber(val)
-			? Number(val)
-			: val;
+		// coercion
+		var value = val;
+		if (!flags.strings[key] && isNumber(val)) {
+			value = Number(val);
+		}
+		if (flags.strings[key] && val === true) {
+			value = '';
+		}
+		if (isBooleanKey(key) && typeof val === 'string') {
+			value = value !== 'false';
+		}
+
+		// store
 		setKey(argv, key.split('.'), value);
-
 		(aliases[key] || []).forEach(function (x) {
 			setKey(argv, x.split('.'), value);
 		});
@@ -162,9 +180,6 @@ module.exports = function (args, opts) {
 			var m = arg.match(/^--([^=]+)=([\s\S]*)$/);
 			key = m[1];
 			var value = m[2];
-			if (isBooleanKey(key)) {
-				value = value !== 'false';
-			}
 			setArg(key, value, arg);
 		} else if ((/^--no-.+/).test(arg)) {
 			key = arg.match(/^--no-(.+)/)[1];
@@ -184,7 +199,7 @@ module.exports = function (args, opts) {
 				setArg(key, next === 'true', arg);
 				i += 1;
 			} else {
-				setArg(key, flags.strings[key] ? '' : true, arg);
+				setArg(key, true, arg);
 			}
 		} else if ((/^-[^-]+/).test(arg)) {
 			var letters = arg.slice(1, -1).split('');
@@ -218,7 +233,7 @@ module.exports = function (args, opts) {
 					broken = true;
 					break;
 				} else {
-					setArg(letters[j], flags.strings[letters[j]] ? '' : true, arg);
+					setArg(letters[j], true);
 				}
 			}
 
@@ -235,7 +250,7 @@ module.exports = function (args, opts) {
 					setArg(key, args[i + 1] === 'true', arg);
 					i += 1;
 				} else {
-					setArg(key, flags.strings[key] ? '' : true, arg);
+					setArg(key, true);
 				}
 			}
 		} else {
