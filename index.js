@@ -77,11 +77,16 @@ module.exports = function (args, opts) {
 
 	var argv = { _: [] };
 
-	function argDefined(key, arg) {
-		return (flags.allBools && (/^--[^=]+$/).test(arg))
-			|| flags.strings[key]
+	function keyDefined(key) {
+		return flags.strings[key]
 			|| flags.bools[key]
 			|| aliases[key];
+	}
+
+	function argDefined(key, arg) {
+		// legacy test for whether to call unknownFn
+		return (flags.allBools && (/^--[^=]+$/).test(arg))
+			|| keyDefined(key);
 	}
 
 	function setKey(obj, keys, value) {
@@ -131,6 +136,9 @@ module.exports = function (args, opts) {
 			}
 			if (isBooleanKey(key) && typeof val === 'string' && !(/^(true|false)$/).test(val)) {
 				throw new Error('Unexpected option value for option "' + key + '"');
+			}
+			if (!keyDefined(key)) {
+				throw new Error('Unknown option "' + key + '"');
 			}
 		}
 

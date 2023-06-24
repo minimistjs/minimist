@@ -18,6 +18,7 @@ function throwsWhenStrict(args, parseOptions, testOptions) {
 
 var kMissingString = /Missing option value/;
 var kBooleanWithValue = /Unexpected option value/;
+var kUnknownOption = /Unknown option/;
 
 test('strict missing option value: long string option used alone', function (t) {
 	throwsWhenStrict(['--str'], { string: ['str'] }, { t: t, expected: kMissingString });
@@ -88,9 +89,44 @@ test('strict unexpected option value: short boolean option given value', functio
 	});
 	t.end();
 });
+
 test('strict unexpected option value: short boolean option given value', function (t) {
 	t.doesNotThrow(function () {
 		parse(['--b=false'], { boolean: ['b'] });
+	});
+	t.end();
+});
+
+test('strict unknown option: unknown option', function (t) {
+	throwsWhenStrict(['-u'], { }, { t: t, expected: kUnknownOption });
+	throwsWhenStrict(['--long'], { }, { t: t, expected: kUnknownOption });
+	throwsWhenStrict(['-u=x'], { }, { t: t, expected: kUnknownOption });
+	throwsWhenStrict(['--long=x'], { }, { t: t, expected: kUnknownOption });
+	t.end();
+});
+
+test('strict unknown option: opt.boolean is known', function (t) {
+	t.doesNotThrow(function () {
+		parse(['--bool'], { boolean: ['bool'], strict: true });
+		parse(['-b'], { boolean: ['b'], strict: true });
+	});
+	t.end();
+});
+
+test('strict unknown option: opt.string is known', function (t) {
+	t.doesNotThrow(function () {
+		parse(['--str', 'SSS'], { string: ['str'], strict: true });
+		parse(['-s', 'SSS'], { string: ['s'], strict: true });
+	});
+	t.end();
+});
+
+test('strict unknown option: opt.alias is known', function (t) {
+	t.doesNotThrow(function () {
+		var options = { alias: { aaa: ['a', 'AAA'] }, strict: true };
+		parse(['--aaa'], options);
+		parse(['-a'], options);
+		parse(['--AAA'], options);
 	});
 	t.end();
 });
