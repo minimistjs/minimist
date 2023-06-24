@@ -71,6 +71,8 @@ test('auto bool accumulates with auto string', function (t) {
 	t.end();
 });
 
+/* No longer possible to get string into boolean option so not longer relevant
+
 test('declared boolean overwrites string', function (t) {
 	var options = {
 		boolean: ['b'],
@@ -120,3 +122,4 @@ test('declared boolean alias overwrites string', function (t) {
 
 	t.end();
 });
+*/
