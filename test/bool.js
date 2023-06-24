@@ -143,6 +143,55 @@ test('boolean --boool=false', function (t) {
 	t.end();
 });
 
+test('boolean --boool=other', function (t) {
+	// legacy edge case
+	var parsed = parse(['--boool=other'], {
+		default: {
+			boool: false,
+		},
+		boolean: ['boool'],
+	});
+
+	t.same(parsed.boool, true);
+	t.end();
+});
+
+test('boolean -b=true', function (t) {
+	var parsed = parse(['-b=true'], {
+		default: {
+			b: false,
+		},
+		boolean: ['b'],
+	});
+
+	t.same(parsed.b, true);
+	t.end();
+});
+
+test('boolean -b=false', function (t) {
+	var parsed = parse(['-b=false'], {
+		default: {
+			b: true,
+		},
+		boolean: ['b'],
+	});
+
+	t.same(parsed.b, false);
+	t.end();
+});
+
+test('boolean -b=other', function (t) {
+	var parsed = parse(['-b=other'], {
+		default: {
+			b: false,
+		},
+		boolean: ['b'],
+	});
+
+	t.same(parsed.b, true);
+	t.end();
+});
+
 test('boolean using something similar to true', function (t) {
 	var opts = { boolean: 'h' };
 	var result = parse(['-h', 'true.txt'], opts);
