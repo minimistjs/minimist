@@ -130,3 +130,25 @@ test('strict unknown option: opt.alias is known', function (t) {
 	});
 	t.end();
 });
+
+test('strict unknown option: opts.unknown returns false', function (t) {
+	// Mirror non-strict and skip argument processing if opts.unknown returns false.
+	// Otherwise, throw for unknown option as usual.
+
+	function unknownFn() {
+	}
+	function unknownFnTrue() {
+		return true;
+	}
+	function unknownFnFalse() {
+		return false;
+	}
+
+	throwsWhenStrict(['--x=y'], { unknown: unknownFn }, { t: t, expected: kUnknownOption });
+	throwsWhenStrict(['--x=y'], { unknown: unknownFnTrue }, { t: t, expected: kUnknownOption });
+	t.doesNotThrow(function () {
+		parse(['--x=y'], { strict: true, unknown: unknownFnFalse });
+	});
+
+	t.end();
+});
