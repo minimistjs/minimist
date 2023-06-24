@@ -25,6 +25,7 @@ module.exports = function (args, opts) {
 
 	var flags = {
 		bools: {},
+		known: {},
 		strings: {},
 		unknownFn: null,
 	};
@@ -73,6 +74,10 @@ module.exports = function (args, opts) {
 		}
 	});
 
+	[].concat(opts.known).filter(Boolean).forEach(function (key) {
+		flags.known[key] = true;
+	});
+
 	var defaults = opts.default || {};
 
 	var argv = { _: [] };
@@ -80,7 +85,8 @@ module.exports = function (args, opts) {
 	function keyDefined(key) {
 		return flags.strings[key]
 			|| flags.bools[key]
-			|| aliases[key];
+			|| aliases[key]
+			|| flags.known[key];
 	}
 
 	function argDefined(key, arg) {
