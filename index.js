@@ -25,7 +25,8 @@ module.exports = function (args, opts) {
 
 	var flags = {
 		bools: {},
-		known: {},
+		// known: {},
+		numbers: {},
 		strings: {},
 		unknownFn: null,
 	};
@@ -65,6 +66,7 @@ module.exports = function (args, opts) {
 		});
 	});
 
+	// populating flags.strings with explicit keys and aliases
 	[].concat(opts.string).filter(Boolean).forEach(function (key) {
 		flags.strings[key] = true;
 		if (aliases[key]) {
@@ -74,9 +76,19 @@ module.exports = function (args, opts) {
 		}
 	});
 
-	[].concat(opts.known).filter(Boolean).forEach(function (key) {
-		flags.known[key] = true;
+	// populating flags.numbers with explicit keys and aliases
+	[].concat(opts.number).filter(Boolean).forEach(function (key) {
+		flags.numbers[key] = true;
+		if (aliases[key]) {
+			[].concat(aliases[key]).forEach(function (k) {
+				flags.numbers[k] = true;
+			});
+		}
 	});
+
+	// [].concat(opts.known).filter(Boolean).forEach(function (key) {
+	// 	flags.known[key] = true;
+	// });
 
 	var defaults = opts.default || {};
 
@@ -84,9 +96,10 @@ module.exports = function (args, opts) {
 
 	function keyDefined(key) {
 		return flags.strings[key]
+			|| flags.numbers[key]
 			|| flags.bools[key]
-			|| aliases[key]
-			|| flags.known[key];
+			|| aliases[key];
+		// || flags.known[key];
 	}
 
 	function argDefined(key, arg) {
@@ -140,6 +153,9 @@ module.exports = function (args, opts) {
 			if (flags.strings[key] && val === true) {
 				throw new Error('Missing option value for option "' + key + '"');
 			}
+			if (flags.numbers[key] && !isNumber(val)) {
+				throw new Error('Expecting number value for option "' + key + '"');
+			}
 			if (isBooleanKey(key) && typeof val === 'string' && !(/^(true|false)$/).test(val)) {
 				throw new Error('Unexpected option value for option "' + key + '"');
 			}
@@ -150,7 +166,9 @@ module.exports = function (args, opts) {
 
 		// coercion
 		var value = val;
-		if (!flags.strings[key] && isNumber(val)) {
+		if (flags.numbers[key]) {
+			value = Number(val);
+		} else if (!flags.strings[key] && isNumber(val)) {
 			value = Number(val);
 		}
 		if (flags.strings[key] && val === true) {

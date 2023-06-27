@@ -131,19 +131,19 @@ test('strict unknown option: opt.alias is known', function (t) {
 	t.end();
 });
 
-test('strict unknown option: opt.known is known (of course!)', function (t) {
-	t.doesNotThrow(function () {
-		// try known as a string and array of strings, with and without option values
-		parse(['--aaa'], { known: 'aaa', strict: true });
-		parse(['--aaa=value'], { known: 'aaa', strict: true });
-		parse(['--aaa', 'value'], { known: 'aaa', strict: true });
-		parse(['--bbb'], { known: ['aaa', 'bbb'], strict: true });
-		parse(['-s'], { known: ['s'], strict: true });
-		parse(['-s=123'], { known: ['s'], strict: true });
-		parse(['-abc'], { known: ['a', 'b', 'c'], strict: true });
-	});
-	t.end();
-});
+// test('strict unknown option: opt.known is known (of course!)', function (t) {
+// 	t.doesNotThrow(function () {
+// 		// try known as a string and array of strings, with and without option values
+// 		parse(['--aaa'], { known: 'aaa', strict: true });
+// 		parse(['--aaa=value'], { known: 'aaa', strict: true });
+// 		parse(['--aaa', 'value'], { known: 'aaa', strict: true });
+// 		parse(['--bbb'], { known: ['aaa', 'bbb'], strict: true });
+// 		parse(['-s'], { known: ['s'], strict: true });
+// 		parse(['-s=123'], { known: ['s'], strict: true });
+// 		parse(['-abc'], { known: ['a', 'b', 'c'], strict: true });
+// 	});
+// 	t.end();
+// });
 
 test('strict unknown option: opts.unknown returns false', function (t) {
 	// Mirror non-strict and skip argument processing if opts.unknown returns false.
