@@ -164,7 +164,7 @@ test('boolean -b=true', function (t) {
 		boolean: ['b'],
 	});
 
-	t.same(parsed.b, true);
+	t.same(parsed.b, 'true'); // [sic] legacy behaviour
 	t.end();
 });
 
@@ -176,7 +176,7 @@ test('boolean -b=false', function (t) {
 		boolean: ['b'],
 	});
 
-	t.same(parsed.b, false);
+	t.same(parsed.b, 'false'); // [sic] legacy behaviour
 	t.end();
 });
 
@@ -188,7 +188,7 @@ test('boolean -b=other', function (t) {
 		boolean: ['b'],
 	});
 
-	t.same(parsed.b, true);
+	t.same(parsed.b, 'other'); // [sic] legacy behaviour
 	t.end();
 });
 

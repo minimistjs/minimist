@@ -70,3 +70,53 @@ test('auto bool accumulates with auto string', function (t) {
 
 	t.end();
 });
+
+test('declared boolean overwrites string', function (t) {
+	var options = {
+		boolean: ['b'],
+	};
+
+	// Verify the setup, that can get a string into the option. (Can't do this for long options.)
+	var argv1 = parse(['-b=xyz'], options);
+	t.deepEqual(argv1, {
+		b: 'xyz',
+		_: [],
+	});
+
+	// Check that declared boolean overwrites string, and does not accumulate into array.
+	var argv2 = parse(['-b=xyz', '-b'], options);
+
+	t.deepEqual(argv2, {
+		b: true,
+		_: [],
+	});
+
+	t.end();
+});
+
+test('declared boolean alias overwrites string', function (t) {
+	// https://github.com/minimistjs/minimist/issues/31
+	var options = {
+		boolean: ['b'],
+		alias: { b: 'B' },
+	};
+
+	// Verify the setup, that can get a string into the option. (Can't do this for long options.)
+	var argv1 = parse(['-B=xyz'], options);
+	t.deepEqual(argv1, {
+		b: 'xyz',
+		B: 'xyz',
+		_: [],
+	});
+
+	// Check that declared boolean overwrites string, and does not accumulate into array.
+	var argv2 = parse(['-B=xyz', '-B'], options);
+
+	t.deepEqual(argv2, {
+		b: true,
+		B: true,
+		_: [],
+	});
+
+	t.end();
+});

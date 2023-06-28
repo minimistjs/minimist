@@ -144,7 +144,11 @@ module.exports = function (args, opts) {
 		}
 	}
 
-	function setArg(key, val, arg) {
+	// eslint-disable-next-line max-params
+	function setArg(key, val, arg, legacyBehaviours) {
+		var legacy = legacyBehaviours || {};
+		// legacy.dumbBoolean is for -b=foo which has untyped automatic behaviour [sic] instead of boolean behaviour
+
 		// validation
 		if (arg && flags.unknownFn && !argDefined(key, arg)) {
 			if (flags.unknownFn(arg) === false) { return; }
@@ -156,7 +160,7 @@ module.exports = function (args, opts) {
 			if (flags.numbers[key] && !isNumber(val)) {
 				throw new Error('Expecting number value for option "' + key + '"');
 			}
-			if (isBooleanKey(key) && typeof val === 'string' && !(/^(true|false)$/).test(val)) {
+			if (isBooleanKey(key) && typeof val === 'string' && !((/^(true|false)$/).test(val) || legacy.dumbBoolean)) {
 				throw new Error('Unexpected option value for option "' + key + '"');
 			}
 			if (!keyDefined(key)) {
@@ -174,7 +178,7 @@ module.exports = function (args, opts) {
 		if (flags.strings[key] && val === true) {
 			value = '';
 		}
-		if (isBooleanKey(key) && typeof val === 'string') {
+		if (isBooleanKey(key) && !legacy.dumbBoolean && typeof val === 'string') {
 			value = value !== 'false';
 		}
 
@@ -246,7 +250,7 @@ module.exports = function (args, opts) {
 				}
 
 				if ((/[A-Za-z]/).test(letters[j]) && next[0] === '=') {
-					setArg(letters[j], next.slice(1), arg);
+					setArg(letters[j], next.slice(1), arg, { dumbBoolean: true });
 					broken = true;
 					break;
 				}
