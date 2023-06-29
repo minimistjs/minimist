@@ -168,9 +168,12 @@ module.exports = function (args, opts) {
 			if (flags.unknownFn(arg) === false) { return; }
 		}
 
-		var value = !flags.strings[key] && isNumber(val)
-			? Number(val)
-			: val;
+		var value = val;
+		if (flags.numbers[key]) {
+			value = Number(val);
+		} else if (!flags.strings[key] && isNumber(val)) {
+			value = Number(val);
+		}
 		setKey(argv, key.split('.'), value);
 
 		(aliases[key] || []).forEach(function (x) {
