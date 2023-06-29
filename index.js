@@ -167,6 +167,7 @@ module.exports = function (args, opts) {
 		if (arg && flags.unknownFn && !argDefined(key, arg)) {
 			if (flags.unknownFn(arg) === false) { return; }
 		}
+
 		var value = !flags.strings[key] && isNumber(val)
 			? Number(val)
 			: val;
