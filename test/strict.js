@@ -17,8 +17,11 @@ function throwsWhenStrict(args, parseOptions, testOptions) {
 }
 
 var kMissingString = /Missing option value/;
+var kMissingNumber = /Expecting number value/;
 var kBooleanWithValue = /Unexpected option value/;
 var kUnknownOption = /Unknown option/;
+
+// missing option value
 
 test('strict missing option value: long string option used alone', function (t) {
 	throwsWhenStrict(['--str'], { string: ['str'] }, { t: t, expected: kMissingString });
@@ -58,6 +61,62 @@ test('strict missing option value: implied empty string is ok (--str=)', functio
 	});
 	t.end();
 });
+
+// missing number value
+
+test('strict missing number value: long number option used alone', function (t) {
+	throwsWhenStrict(['--num'], { number: ['num'] }, { t: t, expected: kMissingNumber });
+	t.end();
+});
+
+test('strict missing number value: short number option used alone', function (t) {
+	throwsWhenStrict(['-n'], { number: ['n'] }, { t: t, expected: kMissingNumber });
+	t.end();
+});
+
+test('strict missing number value: number option alias used alone', function (t) {
+	throwsWhenStrict(['-n'], { number: ['num'], alias: { num: 'n' } }, { t: t, expected: kMissingNumber });
+	t.end();
+});
+
+test('strict missing number value: long number option followed by non-number', function (t) {
+	throwsWhenStrict(['--num', 'xyz'], { number: ['num'] }, { t: t, expected: kMissingNumber });
+	t.end();
+});
+
+test('strict missing number value: short number option followed by non-number', function (t) {
+	throwsWhenStrict(['-n', 'xyz'], { number: ['n'] }, { t: t, expected: kMissingNumber });
+	t.end();
+});
+
+test('strict missing number value: long number option = non-number', function (t) {
+	throwsWhenStrict(['--num=xyz'], { number: ['num'] }, { t: t, expected: kMissingNumber });
+	t.end();
+});
+
+test('strict missing number value: short number option = non-number', function (t) {
+	throwsWhenStrict(['-n=xyz'], { number: ['n'] }, { t: t, expected: kMissingNumber });
+	t.end();
+});
+
+test('strict missing number value: number option followed by option (rather than value)', function (t) {
+	throwsWhenStrict(['--num', '-a'], { number: ['num'] }, { t: t, expected: kMissingNumber });
+	t.end();
+});
+
+test('strict missing number value: short number option used before end of short option group', function (t) {
+	throwsWhenStrict(['-nb'], { number: ['n'], boolean: 'b' }, { t: t, expected: kMissingNumber });
+	t.end();
+});
+
+test('strict missing number value: number does not throw', function (t) {
+	t.doesNotThrow(function () {
+		parse(['--num', '123'], { number: ['num'] });
+	});
+	t.end();
+});
+
+// unexpected option value
 
 test('strict unexpected option value: long boolean option given value (other than true/false)', function (t) {
 	throwsWhenStrict(['--bool=x'], { boolean: ['bool'] }, { t: t, expected: kBooleanWithValue });
@@ -121,6 +180,14 @@ test('strict unknown option: opt.string is known', function (t) {
 	t.end();
 });
 
+test('strict unknown option: opt.number is known', function (t) {
+	t.doesNotThrow(function () {
+		parse(['--num', '123'], { number: ['num'], strict: true });
+		parse(['-n', '123'], { number: ['n'], strict: true });
+	});
+	t.end();
+});
+
 test('strict unknown option: opt.alias is known', function (t) {
 	t.doesNotThrow(function () {
 		var options = { alias: { aaa: ['a', 'AAA'] }, strict: true };
@@ -130,39 +197,3 @@ test('strict unknown option: opt.alias is known', function (t) {
 	});
 	t.end();
 });
-
-// test('strict unknown option: opt.known is known (of course!)', function (t) {
-// 	t.doesNotThrow(function () {
-// 		// try known as a string and array of strings, with and without option values
-// 		parse(['--aaa'], { known: 'aaa', strict: true });
-// 		parse(['--aaa=value'], { known: 'aaa', strict: true });
-// 		parse(['--aaa', 'value'], { known: 'aaa', strict: true });
-// 		parse(['--bbb'], { known: ['aaa', 'bbb'], strict: true });
-// 		parse(['-s'], { known: ['s'], strict: true });
-// 		parse(['-s=123'], { known: ['s'], strict: true });
-// 		parse(['-abc'], { known: ['a', 'b', 'c'], strict: true });
-// 	});
-// 	t.end();
-// });
-
-// test('strict unknown option: opts.unknown returns false', function (t) {
-// 	// Mirror non-strict and skip argument processing if opts.unknown returns false.
-// 	// Otherwise, throw for unknown option as usual.
-
-// 	function unknownFn() {
-// 	}
-// 	function unknownFnTrue() {
-// 		return true;
-// 	}
-// 	function unknownFnFalse() {
-// 		return false;
-// 	}
-
-// 	throwsWhenStrict(['--x=y'], { unknown: unknownFn }, { t: t, expected: kUnknownOption });
-// 	throwsWhenStrict(['--x=y'], { unknown: unknownFnTrue }, { t: t, expected: kUnknownOption });
-// 	t.doesNotThrow(function () {
-// 		parse(['--x=y'], { strict: true, unknown: unknownFnFalse });
-// 	});
-
-// 	t.end();
-// });

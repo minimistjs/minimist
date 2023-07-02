@@ -151,7 +151,7 @@ module.exports = function (args, opts) {
 			if (flags.strings[key] && val === true) {
 				throw new Error('Missing option value for option "' + key + '"');
 			}
-			if (flags.numbers[key] && !isNumber(val)) {
+			if (flags.numbers[key] && !(isNumber(val) || val === false)) {
 				throw new Error('Expecting number value for option "' + key + '"');
 			}
 			if (isBooleanKey(key) && typeof val === 'string' && !(/^(true|false)$/).test(val)) {
@@ -170,7 +170,13 @@ module.exports = function (args, opts) {
 
 		var value = val;
 		if (flags.numbers[key]) {
-			value = Number(val);
+			if (isNumber(val)) {
+				value = Number(val);
+			} else if (value === false) {
+				value = val; // --no-foo
+			} else {
+				value = NaN;
+			}
 		} else if (!flags.strings[key] && isNumber(val)) {
 			value = Number(val);
 		}
