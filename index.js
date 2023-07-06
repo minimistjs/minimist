@@ -239,6 +239,11 @@ module.exports = function (args, opts) {
 				checkStrictVal(key, next);
 				setArg(key, next === 'true', arg);
 				i += 1;
+			} else if (flags.numbers[key] && isNumber(next)) {
+				// This is a second look to pick up negative numbers.
+				checkStrictVal(key, next);
+				setArg(key, next, arg);
+				i += 1;
 			} else {
 				checkStrictVal(key, true);
 				setArg(key, flags.strings[key] ? '' : true, arg);
@@ -297,6 +302,11 @@ module.exports = function (args, opts) {
 				} else if (args[i + 1] && (/^(true|false)$/).test(args[i + 1])) {
 					checkStrictVal(key, args[i + 1]);
 					setArg(key, args[i + 1] === 'true', arg);
+					i += 1;
+				} else if (flags.numbers[key] && isNumber(args[i + 1])) {
+					// This is a second look to pick up negative numbers.
+					checkStrictVal(key, args[i + 1]);
+					setArg(key, args[i + 1], arg);
 					i += 1;
 				} else {
 					checkStrictVal(key, true);
