@@ -3,7 +3,7 @@
 var parse = require('../');
 var test = require('tape');
 
-test('nums', function (t) {
+test('implicit nums', function (t) {
 	var argv = parse([
 		'-x', '1234',
 		'-y', '5.67',
@@ -37,13 +37,13 @@ test('already a number', function (t) {
 	t.end();
 });
 
-test('number: short option', function (t) {
+test('number type: short option', function (t) {
 	var options = { number: 'n' };
 	var argv = parse(['-n', '123'], options);
 	t.deepEqual(argv, { n: 123, _: [] });
 
-	// argv = parse(['-n', '-123'], options);
-	// t.deepEqual(argv, { n: -123, _: [] });
+	argv = parse(['-n', '-123'], options);
+	t.deepEqual(argv, { n: -123, _: [] });
 
 	argv = parse(['-n=123'], options);
 	t.deepEqual(argv, { n: 123, _: [] });
@@ -61,13 +61,13 @@ test('number: short option', function (t) {
 	t.end();
 });
 
-test('number: long option', function (t) {
+test('number type: long option', function (t) {
 	var options = { number: 'num' };
 	var argv = parse(['--num', '123'], options);
 	t.deepEqual(argv, { num: 123, _: [] });
 
-	// argv = parse(['--num', '-123'], options);
-	// t.deepEqual(argv, { num: -123, _: [] });
+	argv = parse(['--num', '-123'], options);
+	t.deepEqual(argv, { num: -123, _: [] });
 
 	argv = parse(['--num=123'], options);
 	t.deepEqual(argv, { num: 123, _: [] });
