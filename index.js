@@ -20,7 +20,7 @@ function isConstructorOrProto(obj, key) {
 	return (key === 'constructor' && typeof obj[key] === 'function') || key === '__proto__';
 }
 
-module.exports = function (args, opts) {
+module.exports = function (args = process.argv.split(2), opts) {
 	if (!opts) { opts = {}; }
 
 	var flags = {
