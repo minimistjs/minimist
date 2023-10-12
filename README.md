@@ -25,7 +25,7 @@ $ node example/parse.js -a beep -b boop
 ```
 
 ```
-$ node example/parse.js -x 3 -y 4 -n5 -abc --beep=boop foo bar baz
+$ node example/parse.js -x 3 -y 4 -n5 -abc --beep=boop --no-ding foo bar baz
 {
 	_: ['foo', 'bar', 'baz'],
 	x: 3,
@@ -34,19 +34,10 @@ $ node example/parse.js -x 3 -y 4 -n5 -abc --beep=boop foo bar baz
 	a: true,
 	b: true,
 	c: true,
-	beep: 'boop'
+	beep: 'boop',
+	ding: false
 }
 ```
-
-# security
-
-Previous versions had a prototype pollution bug that could cause privilege
-escalation in some circumstances when handling untrusted user input.
-
-Please use version 1.2.6 or later:
-
-* https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)
-* https://snyk.io/vuln/SNYK-JS-MINIMIST-559764 (version <=1.2.3)
 
 # methods
 
@@ -64,6 +55,8 @@ them.
 Numeric-looking arguments will be returned as numbers unless `opts.string` or
 `opts.boolean` contains that argument name. To disable numeric conversion
 for non-option arguments, add `'_'` to `opts.string`.
+
+A negated argument of the form `--no-foo` returns `false` for option `foo`.
 
 Any arguments after `'--'` will not be parsed and will end up in `argv._`.
 
