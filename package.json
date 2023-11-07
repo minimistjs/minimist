@@ -59,6 +59,9 @@
 		"url": "https://github.com/sponsors/ljharb"
 	},
 	"license": "MIT",
+	"engines": {
+		"node": ">= 0.4"
+	},
 	"auto-changelog": {
 		"output": "CHANGELOG.md",
 		"template": "keepachangelog",
