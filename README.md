@@ -62,7 +62,8 @@ Return an argument object `argv` populated with the array arguments from `args`.
 them.
 
 Numeric-looking arguments will be returned as numbers unless `opts.string` or
-`opts.boolean` is set for that argument name.
+`opts.boolean` contains that argument name. To disable numeric conversion
+for non-option arguments, add `'_'` to `opts.string`.
 
 Any arguments after `'--'` will not be parsed and will end up in `argv._`.
 
