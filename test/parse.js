@@ -93,12 +93,14 @@ test('strings', function (t) {
 });
 
 test('stringArgs', function (t) {
-	var s = parse(['  ', '  '], { string: '_' })._;
-	t.same(s.length, 2);
+	var s = parse(['  ', '  ', '3'], { string: '_' })._;
+	t.same(s.length, 3);
 	t.same(typeof s[0], 'string');
 	t.same(s[0], '  ');
 	t.same(typeof s[1], 'string');
 	t.same(s[1], '  ');
+	t.same(typeof s[2], 'string');
+	t.same(s[2], '3');
 	t.end();
 });
 
