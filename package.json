@@ -12,7 +12,7 @@
 		"npmignore": "^0.3.1",
 		"nyc": "^10.3.2",
 		"safe-publish-latest": "^2.0.0",
-		"tape": "^5.7.3"
+		"tape": "^5.7.5"
 	},
 	"scripts": {
 		"prepack": "npmignore --auto --commentLines=auto",
