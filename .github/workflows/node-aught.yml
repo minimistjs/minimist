@@ -12,10 +12,3 @@ jobs:
       range: '< 10 >= 0.7'
       type: minors
       command: npm run tests-only
-
-  node:
-    name: 'node < 10'
-    needs: [tests]
-    runs-on: ubuntu-latest
-    steps:
-      - run: 'echo tests completed'
