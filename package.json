@@ -27,17 +27,7 @@
 		"postversion": "auto-changelog && git add CHANGELOG.md && git commit --no-edit --amend && git tag -f \"v$(node -e \"console.log(require('./package.json').version)\")\""
 	},
 	"testling": {
-		"files": "test/*.js",
-		"browsers": [
-			"ie/6..latest",
-			"ff/5",
-			"firefox/latest",
-			"chrome/10",
-			"chrome/latest",
-			"safari/5.1",
-			"safari/latest",
-			"opera/12"
-		]
+		"files": "test/*.js"
 	},
 	"repository": {
 		"type": "git",
