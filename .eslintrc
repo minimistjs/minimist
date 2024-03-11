@@ -25,5 +25,9 @@
 				"camelcase": 0,
 			},
 		},
-	]
+		{
+			"files": "example/**",
+			"extends": "@ljharb/eslint-config/node/latest",
+		},
+	],
 }

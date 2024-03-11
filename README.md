@@ -14,8 +14,15 @@ fanciful decoration.
 
 # example
 
+Example files: [example/parse.js](./example/parse.js) (CJS) / [example/parse.mjs](./example/parse.mjs) (ESM)
+
 ``` js
-var argv = require('minimist')(process.argv.slice(2));
+// for CJS
+const argv = require('minimist')(process.argv.slice(2));
+
+// for ESM
+// import minimist from 'minimist';
+// const argv = minimist(process.argv.slice(2));
 console.log(argv);
 ```
 
@@ -42,10 +49,11 @@ $ node example/parse.js -x 3 -y 4 -n5 -abc --beep=boop --no-ding foo bar baz
 # methods
 
 ``` js
-var parseArgs = require('minimist')
+const parseArgs = require('minimist');
 ```
 
-## var argv = parseArgs(args, opts={})
+<a name="var-argv--parseargsargs-opts"></a>
+## const argv = parseArgs(args, opts={})
 
 Return an argument object `argv` populated with the array arguments from `args`.
 
