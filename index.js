@@ -89,7 +89,9 @@ module.exports = function (args, opts) {
 		for (var i = 0; i < keys.length - 1; i++) {
 			var key = keys[i];
 			if (isConstructorOrProto(o, key)) { return; }
-			if (o[key] === undefined) { o[key] = {}; }
+			if (o[key] === undefined) {
+				o[key] = (/^\d+$/).test(keys[i + 1]) ? [] : {};
+			}
 			if (
 				o[key] === Object.prototype
 				|| o[key] === Number.prototype

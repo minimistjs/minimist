@@ -25,12 +25,8 @@ test('dotted default with no alias', function (t) {
 
 test('dotted array', function (t) {
 	var argv = parse(['--a.1.foo', '11']);
-
-	t.notOk(Array.isArray(argv.a));
-
-	t.notOk(0 in argv.a);
-
+	t.true(Array.isArray(argv.a));
+	t.false(0 in argv.a);
 	t.equal(argv.a[1].foo, 11);
-
 	t.end();
 });
