@@ -22,8 +22,8 @@ function isConstructorOrProto(obj, key) {
 
 function resolveArrays(o, key) {
 	var ARRAY = RegExp(/^([^[]+)\[([^\]]+)\](.*)/);
-	var groups = ARRAY.exec(key);
-	while (groups) {
+	var groups;
+	while ((groups = ARRAY.exec(key))) {
 		var arr = groups[1];
 		var idx = groups[2];
 		var rest = groups[3];
@@ -32,7 +32,6 @@ function resolveArrays(o, key) {
 		}
 		o = o[arr];
 		key = idx + (rest || '');
-		groups = ARRAY.exec(key);
 	}
 	return [o, key];
 }
