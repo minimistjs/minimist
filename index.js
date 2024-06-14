@@ -20,6 +20,23 @@ function isConstructorOrProto(obj, key) {
 	return (key === 'constructor' && typeof obj[key] === 'function') || key === '__proto__';
 }
 
+function resolveArrays(o, key) {
+	var ARRAY = RegExp(/^([^[]+)\[([^\]]+)\](.*)/);
+	var groups = ARRAY.exec(key);
+	while (groups) {
+		var arr = groups[1];
+		var idx = groups[2];
+		var rest = groups[3];
+		if (!Array.isArray(o[arr])) {
+			o[arr] = [];
+		}
+		o = o[arr];
+		key = idx + (rest || '');
+		groups = ARRAY.exec(key);
+	}
+	return [o, key];
+}
+
 module.exports = function (args, opts) {
 	if (!opts) { opts = {}; }
 
@@ -86,9 +103,13 @@ module.exports = function (args, opts) {
 
 	function setKey(obj, keys, value) {
 		var o = obj;
+		var resolved;
 		for (var i = 0; i < keys.length - 1; i++) {
 			var key = keys[i];
 			if (isConstructorOrProto(o, key)) { return; }
+			resolved = resolveArrays(o, key);
+			o = resolved[0];
+			key = resolved[1];
 			if (o[key] === undefined) { o[key] = {}; }
 			if (
 				o[key] === Object.prototype
@@ -103,6 +124,9 @@ module.exports = function (args, opts) {
 
 		var lastKey = keys[keys.length - 1];
 		if (isConstructorOrProto(o, lastKey)) { return; }
+		resolved = resolveArrays(o, lastKey);
+		o = resolved[0];
+		lastKey = resolved[1];
 		if (
 			o === Object.prototype
 			|| o === Number.prototype

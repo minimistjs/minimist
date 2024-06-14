@@ -34,3 +34,14 @@ test('dotted array', function (t) {
 
 	t.end();
 });
+
+test('dotted notation with array in square bracket syntax', function (t) {
+	var argv = parse(['--a[1][0].foo', 'x', '--a[1][2]', '42']);
+	t.ok(Array.isArray(argv.a));
+	t.notOk(0 in argv.a);
+	t.ok(Array.isArray(argv.a[1]));
+	t.equal(argv.a[1][0].foo, 'x');
+	t.notOk(1 in argv.a[1]);
+	t.equal(argv.a[1][2].foo, 42);
+	t.end();
+});
