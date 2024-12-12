@@ -3,6 +3,9 @@
 	"version": "1.2.8",
 	"description": "parse argument options",
 	"main": "index.js",
+	"files": [
+		"index.js"
+	],
 	"devDependencies": {
 		"@ljharb/eslint-config": "^21.1.1",
 		"aud": "^2.0.4",
