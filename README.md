@@ -72,9 +72,10 @@ options can be:
 
 * `opts.string` - a string or array of strings argument names to always treat as
 strings
-* `opts.boolean` - a boolean, string or array of strings to always treat as
-booleans. if `true` will treat all double hyphenated arguments without equal signs
-as boolean (e.g. affects `--foo`, not `-f` or `--foo=bar`)
+* `opts.boolean` - A boolean, string, or array of strings to always treat as
+booleans. If `true` will treat all double-hyphenated arguments without equal signs
+as boolean (e.g. affects `--foo`, not `-f` or `--foo=bar`) A boolean option will
+consume the following argument if it is the string `true` or `false`. (e.g. `--foo false`)
 * `opts.alias` - an object mapping string names to strings or arrays of string
 argument names to use as aliases
 * `opts.default` - an object mapping string argument names to default values

@@ -32,3 +32,19 @@ test('flag boolean true only affects double hyphen arguments without equals sign
 	t.deepEqual(typeof argv.honk, 'boolean');
 	t.end();
 });
+
+test('flag boolean true includes consuming true/false', function (t) {
+	var argv = parse(['--aaa', 'true', '--bbb', 'false', '--ccc=true', '--ddd=false'], {
+		boolean: true,
+	});
+
+	t.deepEqual(argv, {
+		aaa: true,
+		bbb: false,
+		ccc: 'true', // [sic] check legacy behaviour
+		ddd: 'false', // [sic] check legacy behaviour
+		_: [],
+	});
+
+	t.end();
+});
