@@ -41,6 +41,16 @@ module.exports = function (args, opts) {
 		});
 	}
 
+	if (!Object.keys(opts).includes('boolean')) {
+		if (typeof opts.booleanBoth === 'boolean' && opts.booleanBoth) {
+			flags.booleanBoth = true;
+		} else {
+			[].concat(opts.booleanBoth).filter(Boolean).forEach(function (key) {
+				flags.bools[key] = true;
+			});
+		}
+	}
+
 	var aliases = {};
 
 	function isBooleanKey(key) {
@@ -79,6 +89,7 @@ module.exports = function (args, opts) {
 
 	function argDefined(key, arg) {
 		return (flags.allBools && (/^--[^=]+$/).test(arg))
+			|| (flags.booleanBoth && (/^-[^⁼]+$/).test(arg))
 			|| flags.strings[key]
 			|| flags.bools[key]
 			|| aliases[key];
@@ -177,6 +188,7 @@ module.exports = function (args, opts) {
 				&& !(/^(-|--)[^-]/).test(next)
 				&& !isBooleanKey(key)
 				&& !flags.allBools
+				&& !flags.booleanBoth
 			) {
 				setArg(key, next, arg);
 				i += 1;
@@ -228,6 +240,7 @@ module.exports = function (args, opts) {
 					args[i + 1]
 					&& !(/^(-|--)[^-]/).test(args[i + 1])
 					&& !isBooleanKey(key)
+					&& !flags.booleanBoth
 				) {
 					setArg(key, args[i + 1], arg);
 					i += 1;
