@@ -4,6 +4,7 @@
 [![coverage][codecov-image]][codecov-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
+[![Security][security-image]][security-url]
 
 [![npm badge][npm-badge-png]][package-url]
 
@@ -122,3 +123,5 @@ MIT
 [codecov-url]: https://app.codecov.io/gh/minimistjs/minimist/
 [actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/minimistjs/minimist
 [actions-url]: https://github.com/minimistjs/minimist/actions
+[security-image]: https://secure.software/npm/badge/minimist
+[security-url]: https://secure.software/npm/packages/minimist
