@@ -120,5 +120,5 @@ MIT
 [downloads-url]: https://npm-stat.com/charts.html?package=minimist
 [codecov-image]: https://codecov.io/gh/minimistjs/minimist/branch/main/graphs/badge.svg
 [codecov-url]: https://app.codecov.io/gh/minimistjs/minimist/
-[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/minimistjs/minimist
+[actions-image]: https://img.shields.io/github/check-runs/minimistjs/minimist/main
 [actions-url]: https://github.com/minimistjs/minimist/actions
