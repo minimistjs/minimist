@@ -12,6 +12,11 @@ test('numeric short args', function (t) {
 	);
 });
 
+test('partial numeric short args', function (t) {
+	t.plan(1);
+	t.deepEqual(parse(['-n1b3']), { n: true, 1: true, b: 3, _: [] });
+});
+
 test('short', function (t) {
 	t.deepEqual(
 		parse(['-b']),
