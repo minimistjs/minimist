@@ -78,3 +78,15 @@ test('proto pollution (constructor function) snyk', function (t) {
 	t.equal(argv.y, undefined);
 	t.end();
 });
+
+// https://github.com/minimistjs/minimist/issues/47
+test('options named after Object prototype methods do not crash', function (t) {
+	// These should not throw TypeError
+	t.doesNotThrow(function () { parse(['--toString']); });
+	t.doesNotThrow(function () { parse(['--hasOwnProperty']); });
+	t.doesNotThrow(function () { parse(['--valueOf']); });
+	t.doesNotThrow(function () { parse(['--toLocaleString']); });
+	t.doesNotThrow(function () { parse(['--propertyIsEnumerable']); });
+	t.doesNotThrow(function () { parse(['--isPrototypeOf']); });
+	t.end();
+});

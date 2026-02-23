@@ -24,8 +24,8 @@ module.exports = function (args, opts) {
 	if (!opts) { opts = {}; }
 
 	var flags = {
-		bools: {},
-		strings: {},
+		bools: { __proto__: null },
+		strings: { __proto__: null },
 		unknownFn: null,
 	};
 
@@ -41,7 +41,7 @@ module.exports = function (args, opts) {
 		});
 	}
 
-	var aliases = {};
+	var aliases = { __proto__: null };
 
 	function isBooleanKey(key) {
 		if (flags.bools[key]) {
