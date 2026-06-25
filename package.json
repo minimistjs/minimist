@@ -20,7 +20,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/minimistjs/minimist.git"
+		"url": "git+https://github.com/minimistjs/minimist.git"
 	},
 	"homepage": "https://github.com/minimistjs/minimist",
 	"keywords": [
