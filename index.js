@@ -225,7 +225,7 @@ module.exports = function (args, opts) {
 			key = arg.slice(-1)[0];
 			if (!broken && key !== '-') {
 				if (
-					args[i + 1]
+					args[i + 1] !== undefined
 					&& !(/^(-|--)[^-]/).test(args[i + 1])
 					&& !isBooleanKey(key)
 				) {

@@ -67,3 +67,13 @@ test('short and long', function (t) {
 	);
 	t.end();
 });
+
+test('short options consume empty string values', function (t) {
+	t.deepEqual(parse(['-s', '', 'tail']), { s: '', _: ['tail'] });
+	t.deepEqual(parse(['-s', '', 'tail'], { string: 's' }), { s: '', _: ['tail'] });
+	t.deepEqual(parse(['-as', '', 'tail']), { a: true, s: '', _: ['tail'] });
+	t.deepEqual(parse(['-s', ''], { alias: { s: 'string' } }), { s: '', string: '', _: [] });
+	t.deepEqual(parse(['-b', ''], { boolean: 'b' }), { b: true, _: [''] });
+	t.deepEqual(parse(['-s']), { s: true, _: [] });
+	t.end();
+});
