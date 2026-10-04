@@ -99,6 +99,36 @@ and `argv['--']` with everything after the `--`. Here's an example:
 defined in the `opts` configuration object. If the function returns `false`, the
 unknown option is not added to `argv`.
 
+### Dotted notation
+
+Dots in long option names create nested objects. Both `--foo.bar=3` and
+`--foo.bar 3` produce `{ _: [], foo: { bar: 3 } }`. Multiple options can share
+the same parent object:
+
+``` js
+parseArgs(['--foo.bar=3', '--foo.baz.qux=4']);
+// { _: [], foo: { bar: 3, baz: { qux: 4 } } }
+```
+
+Use the full dotted name when configuring `opts.string`, `opts.boolean`,
+`opts.alias`, or `opts.default`:
+
+``` js
+parseArgs(['--server.port=8080'], {
+	string: ['server.port'],
+	boolean: ['server.verbose'],
+	alias: { 'server.port': 'p' },
+	default: { 'server.host': 'localhost' }
+});
+// { _: [], server: { verbose: false, port: '8080', host: 'localhost' }, p: '8080' }
+```
+
+Negation also works with dotted names: `--no-server.verbose` sets
+`argv.server.verbose` to `false`. Repeated values such as `--foo.bar=3
+--foo.bar=4` produce an array at `argv.foo.bar`. Numeric path components are
+object keys, not array indices: `--foo.0.bar=3` produces
+`{ _: [], foo: { '0': { bar: 3 } } }`.
+
 # install
 
 With [npm](https://npmjs.org) do:
