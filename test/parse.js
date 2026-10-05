@@ -209,3 +209,11 @@ test('nested dotted objects', function (t) {
 	t.same(argv.beep, { boop: true });
 	t.end();
 });
+
+test('option with same name as Option property does not throw', function (t) {
+	t.doesNotThrow(function () {
+		var argv = parse(['--toString', 'VALUE']);
+		t.equal(argv.toString, 'VALUE');
+	});
+	t.end();
+});
